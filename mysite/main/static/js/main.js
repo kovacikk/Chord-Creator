@@ -6,37 +6,15 @@ var inversionId = document.getElementById("inversionId");
 var octaveId = document.getElementById("octaveId");
 
 function generateFirst() {
-    //Tone.Transport.stop();
-    //Tone.Transport.cancel();
 
     var triad = getTriads(keyId.value, degreeId.value);
-    
-    var testSynth = new Tone.PolySynth(3, Tone.Synth).toMaster();
-
-    //var part = new Tone.Part(function(time, note) {
- 
-    //    testSynth.triggerAttackRelease(note, "4n", time);
-    //},
-    //[]
-    //);
-
-
 
     triad = inversionNumbers(triad, octaveId.value, inversionId.value);
     
     console.log(triad)
 
-    //for (i = 0; i < triad.length; i++) {
-    //    part.add(0, triad[i]);
-    //}
+    sampler.triggerAttackRelease(triad, "4n");
 
-    testSynth.triggerAttackRelease(triad, "4n");
-
-    //part.loop = 0;
-    //part.loopEnd = 1;
-    //part.start(0);
-
-    //Tone.Transport.start();
 }
 
 function convertToNumber(note) {

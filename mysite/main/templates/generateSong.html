@@ -84,8 +84,13 @@
                 </div>
 
                 <div class="row" id="playCont">
-                        <button class="btn btn-dark" onclick="generateFirst()" id="generateFirst">Play Chord</button>
+                        <button class="btn btn-dark" onclick="test()" id="generateFirst">Play Chord</button>
                 </div>
     </body>
+    <script>
+        var kawaiiPiano = "{% static 'samples/KawaiiUprightPiano' %}";
+    </script>
+    <script src="{% static 'js/pianoSampler.js' %}"></script>
     <script src="{% static 'js/generateSong.js' %}"></script>
+    
 </html>
