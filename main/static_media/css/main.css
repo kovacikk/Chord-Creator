@@ -1,0 +1,58 @@
+body {
+    background-color: rgb(124, 124, 124);
+}
+
+select {
+    width: 100%;
+    height: 100%;
+
+    background-color: black !important;
+    color: white !important;
+}
+
+#header {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 70px;
+    padding-bottom: 0;
+    margin: 0;
+}
+
+#subHeader {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    margin-top: 0;
+    padding-top: 0;
+    padding-left: 15px;
+}
+
+#headerCont {
+    width: 402px;
+    background-color: white;
+
+    margin-top: 1%;
+    margin-left: 1%;
+}
+
+#genCont {
+    margin-left: 1%;
+    width: 402px;
+}
+
+#generateSong {
+}
+
+#playCont {
+    padding-top: 1%;
+    padding-left: 2%;
+}
+
+#generateFirst {
+    width: 12%;
+}
+
+.label {
+    background-color: aquamarine;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 90%;
+}
+

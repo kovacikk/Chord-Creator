@@ -1,0 +1,22 @@
+body {
+    background-color: rgb(124, 124, 124);
+}
+
+select {
+    width: 100%;
+    height: 100%;
+
+    background-color: black !important;
+    color: white !important;
+}
+
+.label {
+    background-color: aquamarine;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 90%;
+}
+
+button {
+    margin-left: 2%;
+    margin-top: 2%;
+}

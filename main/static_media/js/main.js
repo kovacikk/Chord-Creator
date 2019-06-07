@@ -1,87 +1,20 @@
 console.clear();
-var one = 0;
-var two = 0;
-
-var synth = new Tone.Synth().toMaster();
-        
-const cMajor = [
-    'C4', 'E4', 'G4',
-];
-
-function clickOne() {
-    if (one) {
-        one = 0;
-        document.getElementById("1").style.color = "blue";
-        synth.triggerAttackRelease('c4', '8n');
-    }
-    else {
-        document.getElementById("1").style.color = "red";
-        one = 1;
-        synth.triggerAttackRelease('c4', '8n');
-    }
-}
-function clickTwo() {
-
-}
-
-var synth2 = new Tone.Synth().toMaster()
-
-
-
 
 var keyId = document.getElementById("keyId");
-//console.log(keyId.value)
 var degreeId = document.getElementById("degree");
-//console.log(degreeId.value)
 var inversionId = document.getElementById("inversionId");
-
 var octaveId = document.getElementById("octaveId");
 
 function generateFirst() {
-    Tone.Transport.stop();
-    Tone.Transport.cancel();
-    
-    //console.log(keyId.value)
-    //console.log(degreeId.value)
-    //console.log(keyId.options)
+
     var triad = getTriads(keyId.value, degreeId.value);
 
-    //console.log('first');
-    //synth2.triggerAttackRelease(cMajor, '4n');
-
-    
-    var testSynth = new Tone.PolySynth(3, Tone.style).toMaster();
-
-    var part = new Tone.Part(function(time, note) {
-        //console.log(time, note)
-        //testSynth.triggerAttackRelease("C4", "4n");
-        testSynth.triggerAttackRelease(note, "4n", time);
-        //testSynth.triggerAttackRelease("C4", "4n", time);
-    },
-    []
-    );
-
-    
-    //part.add(0, "C4");
-    //part.add(0, "1");
     triad = inversionNumbers(triad, octaveId.value, inversionId.value);
     
     console.log(triad)
 
-    for (i = 0; i < triad.length; i++) {
-        part.add(0, triad[i]);
-    }
+    sampler.triggerAttackRelease(triad, "4n");
 
-
-    part.loop = 0;
-    part.loopEnd = 1;
-    part.start(0);
-    //document.querySelector("tone-play-toggle").bind(Tone.Transport);
-    
-    
-   
-
-    Tone.Transport.start();
 }
 
 function convertToNumber(note) {

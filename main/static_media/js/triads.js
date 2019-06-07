@@ -80,8 +80,8 @@ function getTriads(key, degree) {
         array = [(key + 11) % 12, (key + 2) % 12, (key + 5) % 12];
     }
 
-    for (j=0; j < 3; j++) {
-        array[j] = convertToLetter(array[j]);
+    for (i=0; i < 3; i++) {
+        array[i] = convertToLetter(array[i]);
     } 
 
     return array;
