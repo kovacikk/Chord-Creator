@@ -1,30 +1,33 @@
-document.getElementById("addChord").addEventListener('click', selectPlay, false);
+document.getElementById("addChord").addEventListener('click', selectReset, false);
+document.getElementById("tempo").addEventListener('change', updateTempo);
 
 var isPlay = false;
-
-function test() {
-    //console.log("here");
-    sampler.triggerAttackRelease(["C4", "E4", "G4"]);
-}
-
-function test2() {
-    sampler.triggerAttackRelease("C4");
-}
-
-function test3() {
-    sampler.triggerAttackRelease("E4");
-}
-
-function test4() {
-    addChord();
-}
-
 var counter = 0;
+var bpm = 120;
 
 function selectPlay() {
     if (isPlay) {
         play();
     }
+}
+
+function selectReset() {
+    if (isPlay) {
+        stop();
+        play();
+    }
+}
+
+function updateTempo() {
+
+    bpm = document.getElementById("tempo").value;
+    //Tone.Transport.bpm = bpm;
+    Tone.Transport.bpm.rampTo(bpm, 1);
+    
+    //if (isPlay) {
+    //    play();
+    //}
+    console.log(document.getElementById("tempo").value);
 }
 
 function addChord() {
@@ -57,6 +60,9 @@ function addChord() {
     var newOctave = newChord.getElementsByTagName("select")[3];
     newOctave.id = "octave" + counterString;
     newOctave.addEventListener('change', selectPlay, false);
+
+    var newIcon = newChord.getElementsByTagName("button")[1];
+    newIcon.id = "icon" + counterString;
 
     song.appendChild(newChord);
     
@@ -116,7 +122,8 @@ function play() {
 
         triad = inversionNumbers(triad, octaveId.value, inversionId.value);
 
-        var array2 = [i, triad];
+        var timeTest = i * 4;
+        var array2 = [i * Tone.Time("2n"), triad];
         triadArray.push(array2);
     }
     console.log(triadArray);
@@ -127,15 +134,50 @@ function play() {
     //}, triadArray, "4n");
 
     var chordPart = new Tone.Part(function(time, triad) {
+        console.log(Tone.Transport.progress);
         sampler.triggerAttackRelease(triad, "2n", time);
+
+        for (i = 0; i < counter; i++) {
+            var counterString = (i+1);
+            var iconId = document.getElementById("icon" + counterString);
+
+            console.log(Tone.Transport.position);
+            var position = Tone.Transport.position;
+            var firstPosition = parseInt(position.split(':')[0], 10);
+            var secondPosition = parseInt(position.split(':')[1], 10);
+            
+            var finalPosition = (firstPosition * 2) + (secondPosition / 2);
+
+            if (i == (finalPosition % counter)) {
+                iconId.classList.remove("btn-light");
+                iconId.classList.add("btn-dark");
+                iconId.classList.add("active");
+            }
+            else {
+                iconId.classList.remove("btn-dark");
+                iconId.classList.add("btn-light");
+                iconId.classList.remove("active");
+            }
+        }
+
     }, triadArray).start(0);
 
-    chordPart.loop = true;
-    chordPart.loopStart = "0:0";
+    //chordPart.loop = true;
+    //chordPart.loopStart = "0:0";
 
-    var endTime = counter * 0.5;
-    chordPart.loopEnd = endTime.toString() + ":0";
+    //var endTime = counter * 0.5;
+    //chordPart.loopEnd = endTime.toString() + ":0";
 
+    Tone.Transport.loop = true;
+    Tone.Transport.loopStart = "0:0";
+
+    var endTime = counter;
+    Tone.Transport.loopEnd = Tone.Time('2n') * counter;
+
+    console.log("Bpm:" + bpm);
+
+    Tone.Transport.bpm = bpm;
+    //Tone.Transport.bpm.rampTo(bpm, 1);
     Tone.Transport.start();
 }
 
