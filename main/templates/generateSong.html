@@ -69,6 +69,10 @@
                 <div class="col-sm-2 btn-group">
                     <button type="button" class="btn btn-light rectangle" aria-pressed="true"></button>
                 </div>
+
+                <div class="col-sm-2">
+                    <button type="button" class="btn btn-dark">Remove Chord</button>
+                </div>
             </div>
         </div>
 
@@ -77,13 +81,13 @@
                 <p>Number of Chords:</p>
             </div>
             <div class="col-sm-2">
-                <input id="chordNumber">
+                <input type="number" class="form-control" id="chordNumber" value="4">
             </div>
             <div class="col-sm-1">
                 <p>Key:</p>
             </div>
             <div class="col-sm-2">
-                <select id="keyId" class="form-control">
+                <select id="mainKey" class="form-control">
                     <option value="Ab">Ab</option>
                     <option value="A">A</option>
                     <option value="Bb">Bb</option>
@@ -107,7 +111,7 @@
         </div>
         <div class="row" id="playCont">
                 <button class="btn btn-dark" onclick="playSong()" id="playSong">Play Song</button>
-                <button class="btn btn-dark" onclick="addChord()" id="addChord">Add Chord</button>
+                <button class="btn btn-dark" onclick="addChord1()" id="addChord">Add Chord</button>
                 <button class="btn btn-dark" onclick="generateSong()" id="generateSong">GenerateSong</button>
         </div>
                 

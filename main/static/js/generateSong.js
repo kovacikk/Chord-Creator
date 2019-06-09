@@ -18,6 +18,10 @@ function selectReset() {
     }
 }
 
+function addChord1() {
+    addChord(0,0,0,0,1);
+}
+
 function updateTempo() {
 
     bpm = document.getElementById("tempo").value;
@@ -30,43 +34,9 @@ function updateTempo() {
     console.log(document.getElementById("tempo").value);
 }
 
-function addChord() {
-    counter += 1;
-    var counterString = counter.toString();
 
-    var song = document.getElementById("songCont");
-    var chord = document.getElementById("chordSettings");
-
-    var newChord = chord.cloneNode(true);
-    newChord.removeAttribute("hidden");
-    newChord.id = "chord" + counterString;
-
-    var newButton = newChord.getElementsByTagName("button")[0];
-    newButton.id = "button" + counterString;
-    newButton.onclick = function() { playTriad(counterString); };
-
-    var newKey = newChord.getElementsByTagName("select")[0];
-    newKey.id = "key" + counterString;
-    newKey.addEventListener('change', selectPlay, false);
-
-    var newDegree = newChord.getElementsByTagName("select")[1];
-    newDegree.id = "degree" + counterString;
-    newDegree.addEventListener('change', selectPlay, false);
-
-    var newInversion = newChord.getElementsByTagName("select")[2];
-    newInversion.id = "inversion" + counterString;
-    newInversion.addEventListener('change', selectPlay, false);
-
-    var newOctave = newChord.getElementsByTagName("select")[3];
-    newOctave.id = "octave" + counterString;
-    newOctave.addEventListener('change', selectPlay, false);
-
-    var newIcon = newChord.getElementsByTagName("button")[1];
-    newIcon.id = "icon" + counterString;
-
-    song.appendChild(newChord);
-    
-    //newButton.innerHTML = "New";
+function removeChord(counterString) {
+    console.log("remove");
 }
 
 
@@ -184,4 +154,75 @@ function play() {
 function stop() {
     Tone.Transport.cancel();
     Tone.Transport.stop();
+}
+
+function addChord(key, degree, inversion, octave, defaultBool) {
+    counter += 1;
+    var counterString = counter.toString();
+
+    var song = document.getElementById("songCont");
+    var chord = document.getElementById("chordSettings");
+
+    var newChord = chord.cloneNode(true);
+    newChord.removeAttribute("hidden");
+    newChord.id = "chord" + counterString;
+
+    var newButton = newChord.getElementsByTagName("button")[0];
+    newButton.id = "button" + counterString;
+    newButton.onclick = function() { playTriad(counterString); };
+
+    var newKey = newChord.getElementsByTagName("select")[0];
+    newKey.id = "key" + counterString;
+    newKey.addEventListener('change', selectPlay, false);
+
+    var newDegree = newChord.getElementsByTagName("select")[1];
+    newDegree.id = "degree" + counterString;
+    newDegree.addEventListener('change', selectPlay, false);
+
+    var newInversion = newChord.getElementsByTagName("select")[2];
+    newInversion.id = "inversion" + counterString;
+    newInversion.addEventListener('change', selectPlay, false);
+
+    var newOctave = newChord.getElementsByTagName("select")[3];
+    newOctave.id = "octave" + counterString;
+    newOctave.addEventListener('change', selectPlay, false);
+
+    var newIcon = newChord.getElementsByTagName("button")[1];
+    newIcon.id = "icon" + counterString;
+
+    //var newRemoveButton = newChord.getElementsByTagName("button")[2];
+    //newRemoveButton.id = "removeButton" + counterString;
+    //newButton.onclick = function() { 
+    //    removeChord(counterString);
+    //};
+
+    if (defaultBool) {
+        newKey.value = document.getElementById("mainKey").value;
+        newDegree.value = 4;
+        newInversion.value = 0;
+        newOctave.value = 4;
+    }
+    else {
+        newKey.value = key;
+        newDegree.value = degree;
+        newInversion.value = inversion;
+        newOctave.value = octave;
+    }
+
+    song.appendChild(newChord);
+}
+
+//Function to Generate Song
+function generateSong() {
+    var key = document.getElementById("mainKey").value;
+    var chordNumber = document.getElementById("chordNumber").value;
+
+    //Full Random
+    for (k = 0; k < chordNumber; k++) {
+        var degree = Math.floor(Math.random() * 7) + 1; 
+        var inversion = Math.floor(Math.random() * 3);
+        var octave = Math.floor(Math.random() * 7) + 1;
+
+        addChord(key, degree, inversion, octave, 0);
+    }
 }
