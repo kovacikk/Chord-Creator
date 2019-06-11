@@ -37,13 +37,64 @@ function updateTempo() {
 
 function removeChord(counterString) {
     console.log("remove");
+
+    var songCont = document.getElementById("songCont");
+    var chordCounter = parseInt(counterString);
+
+    var newCounter = 0;
+    console.log("One to Remove: " + counterString);
+    for (i = 1; i < counter + 1; i++) {
+        //console.log(i);
+        if (i != chordCounter) {
+            newCounter += 1;
+            var chord = document.getElementById("chord" + i);
+            chord.id = "chord" + newCounter.toString();
+
+            var newestCounterString = newCounter.toString();
+
+            chord.getElementsByTagName("button")[0].id = "button" + newCounter.toString();
+            chord.getElementsByTagName("button")[0].onclick = function() { 
+                var number = this.id.split("button").pop();
+                playTriad(number); 
+            };
+
+            chord.getElementsByTagName("select")[0].id = "key" + newCounter.toString();
+
+            chord.getElementsByTagName("select")[1].id = "degree" + newCounter.toString();
+
+            chord.getElementsByTagName("select")[2].id = "inversion" + newCounter.toString();
+
+            chord.getElementsByTagName("select")[3].id = "octave" + newCounter.toString();
+
+            chord.getElementsByTagName("button")[1].id = "icon" + newCounter.toString();
+
+            chord.getElementsByTagName("button")[2].id = "removeButton" + newCounter.toString();
+            //console.log("NewCounter " + newCounter.toString());
+            
+            chord.getElementsByTagName("button")[2].onclick = function() {
+                //console.log(this.id);
+                var number = this.id.split("removeButton").pop();
+                removeChord(number);
+            };
+            //console.log("No - NewCounter: " + newCounter.toString() + "| i: " + i.toString());
+        }
+        else {
+            //Nothing
+            //console.log("Yes - NewCounter: " + newCounter.toString() + "| i: " + i.toString());
+            var chordId = document.getElementById("chord" + counterString);
+            chordId.parentNode.removeChild(chordId);
+        }
+    }
+    counter = newCounter;
+
+    selectReset();
 }
 
 
 //song.ppendChild(newButton)
 
 function playTriad(counterString) {
-    console.log("play:" + counterString);
+    //console.log("play:" + counterString);
 
     var keyId = document.getElementById("key" + counterString);
     var degreeId = document.getElementById("degree" + counterString);
@@ -96,7 +147,7 @@ function play() {
         var array2 = [i * Tone.Time("2n"), triad];
         triadArray.push(array2);
     }
-    console.log(triadArray);
+    //console.log(triadArray);
 
     //var seq = new Tone.Sequence(function(time, triad) {
     //    console.log(triad);
@@ -104,14 +155,14 @@ function play() {
     //}, triadArray, "4n");
 
     var chordPart = new Tone.Part(function(time, triad) {
-        console.log(Tone.Transport.progress);
+        //console.log(Tone.Transport.progress);
         sampler.triggerAttackRelease(triad, "2n", time);
 
         for (i = 0; i < counter; i++) {
             var counterString = (i+1);
             var iconId = document.getElementById("icon" + counterString);
 
-            console.log(Tone.Transport.position);
+            //console.log(Tone.Transport.position);
             var position = Tone.Transport.position;
             var firstPosition = parseInt(position.split(':')[0], 10);
             var secondPosition = parseInt(position.split(':')[1], 10);
@@ -154,6 +205,7 @@ function play() {
 function stop() {
     Tone.Transport.cancel();
     Tone.Transport.stop();
+    console.log("Stop Song");
 }
 
 function addChord(key, degree, inversion, octave, defaultBool) {
@@ -190,15 +242,15 @@ function addChord(key, degree, inversion, octave, defaultBool) {
     var newIcon = newChord.getElementsByTagName("button")[1];
     newIcon.id = "icon" + counterString;
 
-    //var newRemoveButton = newChord.getElementsByTagName("button")[2];
-    //newRemoveButton.id = "removeButton" + counterString;
-    //newButton.onclick = function() { 
-    //    removeChord(counterString);
-    //};
+    var newRemoveButton = newChord.getElementsByTagName("button")[2];
+    newRemoveButton.id = "removeButton" + counterString;
+    newRemoveButton.onclick = function() { 
+        removeChord(counterString);
+    };
 
     if (defaultBool) {
         newKey.value = document.getElementById("mainKey").value;
-        newDegree.value = 4;
+        newDegree.value = 1;
         newInversion.value = 0;
         newOctave.value = 4;
     }
@@ -225,4 +277,26 @@ function generateSong() {
 
         addChord(key, degree, inversion, octave, 0);
     }
+}
+
+function reset() {
+    for (i = 1; i < counter + 1; i++) {
+        var chordId = document.getElementById("chord" + i.toString());
+        chordId.parentNode.removeChild(chordId);
+    }
+    counter = 0;
+
+    if (isPlay) {
+        playSong();
+    }
+
+    document.getElementById("chordNumber").value = 4;
+    
+    document.getElementById("mainKey").value = "C";
+
+    bpm = 120;
+    Tone.Transport.bpm.rampTo(bpm,1);
+    document.getElementById("tempo").value = bpm;
+
+
 }
