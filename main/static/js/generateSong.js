@@ -266,6 +266,7 @@ function addChord(key, degree, inversion, octave, defaultBool) {
 
 //Function to Generate Song
 function generateSong() {
+    reset();
     var key = document.getElementById("mainKey").value;
     var chordNumber = document.getElementById("chordNumber").value;
 
@@ -277,6 +278,71 @@ function generateSong() {
 
         addChord(key, degree, inversion, octave, 0);
     }
+
+    selectReset();
+}
+
+function generateSimpleSong() {
+    reset();
+    var key = document.getElementById("mainKey").value;
+    var chordNumber = document.getElementById("chordNumber").value;
+
+    var isGood = 0;
+    var array = new Array(chordNumber);
+    array[0] = 1;
+    //Attempt to make a song
+    while(isGood == 0) {
+        for (k = 1; k < chordNumber; k++) {
+            //Previous Chord was 1
+            if (array[k-1] == 1) {
+                //Any Chord Can Follow
+                array[k] = Math.floor((Math.random() * 6) + 2);
+            }
+            //Previous Chord was 2 or 4
+            else if ((array[k-1] == 2) || (array[k-1] == 4))  {
+                var choice = Math.floor((Math.random() * 2))
+                if (choice == 0) {
+                    array[k] = 5;
+                }
+                else {
+                    array[k] = 7;
+                }
+            }
+            //Previous Chord was 3
+            else if (array[k-1] == 3) {
+                array[k] = 6;
+            }
+            //Previous Chord was 5 or 7
+            else if ((array[k-1] == 5) || (array[k-1] == 7)) {
+                array[k] = 1;
+            }
+            //Previous Chord was 6
+            else if (array[k-1] == 6) {
+                var choice = Math.floor((Math.random() * 2))
+                if (choice == 0) {
+                    array[k] = 2;
+                }
+                else {
+                    array[k] = 4;
+                }
+            }
+            else {
+                console.log("Error");
+            }
+        }
+
+        //Check if chord structure works
+        if ((array[chordNumber - 1] == 5) || array[chordNumber - 1] == 7) {
+            isGood = 1;
+        }
+    }
+
+    for (k = 0; k < chordNumber; k++) {
+        //Add Inversions and Octave Stuff
+        addChord(key, array[k], 0, 4, 0);
+    }
+
+    selectReset();
 }
 
 function reset() {
@@ -290,13 +356,13 @@ function reset() {
         playSong();
     }
 
-    document.getElementById("chordNumber").value = 4;
-    
-    document.getElementById("mainKey").value = "C";
+    //document.getElementById("chordNumber").value = 4;
 
-    bpm = 120;
-    Tone.Transport.bpm.rampTo(bpm,1);
-    document.getElementById("tempo").value = bpm;
+    //document.getElementById("mainKey").value = "C";
+
+    //bpm = 120;
+    //Tone.Transport.bpm.rampTo(bpm,1);
+    //document.getElementById("tempo").value = bpm;
 
 
 }
