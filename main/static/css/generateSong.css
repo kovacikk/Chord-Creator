@@ -20,3 +20,79 @@ button {
     margin-left: 2%;
     margin-top: 2%;
 }
+
+a {
+    margin-left: 2%;
+    margin-top: 2%;
+}
+
+#degree {
+    background-color: whitesmoke;
+    width: 60%;
+    margin-left: 3%;
+    margin-top: 1%;
+}
+
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+span {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 18px;
+}
+
+#degreeCont {
+    
+    width: 100%;
+    font-weight: bold;
+}
+
+.noMargin {
+    margin-left: 0;
+    margin-top: 0;
+
+    text-decoration: none;
+    font-weight: normal;
+    color: black;    
+}
+
+.noMargin:hover {
+    margin-left: 0;
+    margin-top: 0;
+
+    text-decoration: none;
+    font-weight: normal;
+    color: black;  
+
+    background-color: rgb(236, 236, 236);
+}
+
+#inversionType, #octaveMin, #octaveMax, #degreeType, #octaveType {
+    background-color: white !important;
+    color: black !important;
+    height: auto !important;
+    font-size: 14px;
+}
+
+.line {
+    background-color: rgb(158, 157, 157);
+    height: 2px;
+    width: 90%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.minMax {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#collapseDegree, #collapseOctave, #collapseInversion {
+    background-color: rgb(27, 27, 27);
+}
+
+.white {
+    color: white;
+}

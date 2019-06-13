@@ -1,5 +1,6 @@
 document.getElementById("addChord").addEventListener('click', selectReset, false);
 document.getElementById("tempo").addEventListener('change', updateTempo);
+document.getElementById("octaveType").addEventListener('change', updateView);
 
 var isPlay = false;
 var counter = 0;
@@ -20,6 +21,38 @@ function selectReset() {
 
 function addChord1() {
     addChord(0,0,0,0,1);
+}
+
+function updateView() {
+    console.log("hey");
+    var octaveOption = document.getElementById("octaveType").value;
+    console.log(octaveOption);
+
+    var octaveOptionOne = document.getElementById("octaveOptionOne");
+    var octaveOptionTwo = document.getElementById("octaveOptionTwo");
+    var octaveOptionTwoTwo = document.getElementById("octaveOptionTwoTwo");
+    var octaveOptionThree = document.getElementById("octaveOptionThree");
+
+    if (octaveOption == 0) {
+        console.log("one");
+        octaveOptionOne.removeAttribute("hidden");
+        octaveOptionTwo.setAttribute("hidden", true);
+        octaveOptionTwoTwo.setAttribute("hidden", true);
+        octaveOptionThree.setAttribute("hidden", true);
+    }else if (octaveOption == 1) {
+        console.log("2");
+        octaveOptionOne.setAttribute("hidden", true);
+        octaveOptionTwo.removeAttribute("hidden");
+        octaveOptionTwoTwo.removeAttribute("hidden", true);
+        octaveOptionThree.setAttribute("hidden", true);
+    }
+    else {
+        console.log("3");
+        octaveOptionOne.setAttribute("hidden", true);
+        octaveOptionTwo.setAttribute("hidden", true);
+        octaveOptionTwoTwo.setAttribute("hidden", true);
+        octaveOptionThree.removeAttribute("hidden");
+    }
 }
 
 function updateTempo() {
