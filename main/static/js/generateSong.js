@@ -1,10 +1,12 @@
 document.getElementById("addChord").addEventListener('click', selectReset, false);
 document.getElementById("tempo").addEventListener('change', updateTempo);
 document.getElementById("octaveType").addEventListener('change', updateView);
+document.getElementById("instrument").addEventListener('change', updateInstrument);
 
 var isPlay = false;
 var counter = 0;
 var bpm = 120;
+var sampler = samplerPiano;
 
 function selectPlay() {
     if (isPlay) {
@@ -52,6 +54,19 @@ function updateView() {
         octaveOptionTwo.setAttribute("hidden", true);
         octaveOptionTwoTwo.setAttribute("hidden", true);
         octaveOptionThree.removeAttribute("hidden");
+    }
+}
+
+function updateInstrument() {
+    sampler = document.getElementById("instrument").value;
+    if (sampler == "samplerGuitar") {
+        sampler = samplerGuitar;
+    }
+    else if (sampler == "samplerPiano") {
+        sampler = samplerPiano;
+    }
+    else if (sampler == "samplerSynth") {
+        sampler = samplerSynth;
     }
 }
 
@@ -140,6 +155,7 @@ function playTriad(counterString) {
     console.log(triad);
 
     sampler.triggerAttackRelease(triad, "4n");
+
 }
 
 function playSong() {
@@ -147,11 +163,15 @@ function playSong() {
         stop();
         isPlay = false;
         document.getElementById("playSong").innerHTML = "Play Song";
+        document.getElementById("stopButton").setAttribute("hidden", true);
+        document.getElementById("playButton").removeAttribute("hidden");
     }
     else {
         play();
         isPlay = true;
         document.getElementById("playSong").innerHTML = "Stop Song";
+        document.getElementById("playButton").setAttribute("hidden", true);
+        document.getElementById("stopButton").removeAttribute("hidden");
     }
 }
 
@@ -376,6 +396,10 @@ function generateSimpleSong() {
     }
 
     selectReset();
+}
+
+function generateCustomSong() {
+    console.log("GenerateCustomSong");
 }
 
 function reset() {

@@ -96,3 +96,12 @@ span {
 .white {
     color: white;
 }
+
+img {
+    height: auto;
+    width: 100%;
+}
+
+#playButton, #stopButton {
+    cursor: pointer;
+}

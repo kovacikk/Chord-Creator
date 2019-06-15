@@ -1,4 +1,4 @@
-var sampler = new Tone.Sampler({
+var samplerPiano = new Tone.Sampler({
     "A0" : kawaiiPiano + "/A0vH.wav",
     "A1" : kawaiiPiano + "/A1vH.wav",
     "A2" : kawaiiPiano + "/A2vL.wav",
@@ -28,4 +28,4 @@ var sampler = new Tone.Sampler({
    'attack' : '0',
 }).toMaster();
 
-sampler.volume.value = -10;
+samplerPiano.volume.value = -10;
