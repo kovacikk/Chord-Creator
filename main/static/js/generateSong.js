@@ -162,14 +162,14 @@ function playSong() {
     if (isPlay) {
         stop();
         isPlay = false;
-        document.getElementById("playSong").innerHTML = "Play Song";
+        //document.getElementById("playSong").innerHTML = "Play Song";
         document.getElementById("stopButton").setAttribute("hidden", true);
         document.getElementById("playButton").removeAttribute("hidden");
     }
     else {
         play();
         isPlay = true;
-        document.getElementById("playSong").innerHTML = "Stop Song";
+        //document.getElementById("playSong").innerHTML = "Stop Song";
         document.getElementById("playButton").setAttribute("hidden", true);
         document.getElementById("stopButton").removeAttribute("hidden");
     }

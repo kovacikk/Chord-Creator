@@ -10,7 +10,569 @@
         <link rel='stylesheet' type="text/css" href="{% static 'css/generateSong.css' %}">
     </head>
     <body>
+        <div id="navbar" class="row">
+            <div class="col-sm-2">
+                    <img id="logo" src="{% static '/images/chordCreatorLogo.png' %}">
+            </div>
+            <div class="col-sm-3">
+                <a href="/" id="homeLink">
+                    <p id="home">Home</p>
+                </a>
+            </div>
+            <div class="col-sm-5">
+            
+            </div>
+            <div class="col-sm-2" id="acountCon">
+                <div class="row account">
+                    Account
+                </div>
+                <div class="row account">
+                    Signout
+                </div>    
+            </div>
+        </div>
+            
         <br>
+
+        <div id="accordion">
+
+                <div class="card">
+                    <div class="row">
+                  <div class="card-header col-sm-4">
+                    <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                      <span>Full Random</span>
+                    </a>
+                  </div>
+                  <div class="card-header col-sm-4">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                        <span>Simple</span>
+                    </a>
+                </div>
+                <div class="card-header col-sm-4">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+                        <span>Custom</span>
+                    </a>
+                </div>
+                </div>
+                  <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-4 btn-group">
+                                <button class="btn btn-dark" onclick="generateSong()" id="generateSong">Generate</button>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <span>Number of Chords:</span>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <span>Instrument:</span>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <span>Key:</span>                                        </div>
+                                    <div class="col-sm-3">
+                                        <span>Tempo:</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <input type="number" class="form-control" id="chordNumber" value="4">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <select id="instrument" class="form-control">                                                <option selected value="samplerPiano">Piano</option>
+                                            <option value="samplerGuitar">Guitar</option>
+                                            <option value="samplerSynth">Synth</option>
+                                            <option value="samplerCustom">Custom</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <select id="mainKey" class="form-control">
+                                            <option value="Ab">Ab</option>
+                                            <option value="A">A</option>
+                                            <option value="Bb">Bb</option>
+                                            <option value="B">B</option>
+                                            <option value="C" selected>C</option>
+                                            <option value="Db">Db</option>
+                                            <option value="D">D</option>
+                                            <option value="Eb">Eb</option>
+                                            <option value="E">E</option>
+                                            <option value="F">F</option>
+                                            <option value="Gb">Gb</option>
+                                            <option value="G">G</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="number" class="form-control" id="tempo" value="120">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="card">
+                  <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                      <div class="row">
+                          <div class="col-sm-4 btn-group">
+                              <button class="btn btn-dark" onclick="generateSimpleSong()" id="generateSimpleSong">Generate</button>
+                          </div>
+                          <div class="col-sm-8">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <span>Number of Chords:</span>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <span>Instrument:</span>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <span>Key:</span>                                        </div>
+                                    <div class="col-sm-3">
+                                        <span>Tempo:</span>
+                                    </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-sm-3">
+                                    <input type="number" class="form-control" id="chordNumber" value="4">
+                                  </div>
+                                  <div class="col-sm-3">
+                                    <select id="instrument" class="form-control">                                                <option selected value="samplerPiano">Piano</option>
+                                        <option value="samplerGuitar">Guitar</option>
+                                        <option value="samplerSynth">Synth</option>
+                                        <option value="samplerCustom">Custom</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-sm-3">
+                                    <select id="mainKey" class="form-control">
+                                        <option value="Ab">Ab</option>
+                                        <option value="A">A</option>
+                                        <option value="Bb">Bb</option>
+                                        <option value="B">B</option>
+                                        <option value="C" selected>C</option>
+                                        <option value="Db">Db</option>
+                                        <option value="D">D</option>
+                                        <option value="Eb">Eb</option>
+                                        <option value="E">E</option>
+                                        <option value="F">F</option>
+                                        <option value="Gb">Gb</option>
+                                        <option value="G">G</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-sm-3">
+                                        <input type="number" class="form-control" id="tempo" value="120">
+                                  </div>
+                              </div>
+                              <br>
+                              <div class="row">
+                                  <div class="col-sm-3">
+                                      <span>Always Start on One:</span>
+                                  </div>
+                                  <div class="col-sm-3">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                  </div>
+                                  <div class="col-sm-4">
+                                      <span>Always End on Five or Seven:</span>
+                                  </div>
+                                  <div class="col-sm-2">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="card">
+                  <div id="collapseThree" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-4 btn-group">
+                                <button class="btn btn-dark" onclick="generateSimpleSong()" id="generateSimpleSong">Generate</button>
+                            </div>
+                            <div class="col-sm-8">
+                                  <div class="row">
+                                      <div class="col-sm-3">
+                                            <span>Number of Chords:</span>
+                                      </div>
+                                      <div class="col-sm-3">
+                                          <span>Instrument:</span>
+                                      </div>
+                                      <div class="col-sm-3">
+                                            <span>Key:</span>                                        </div>
+                                      <div class="col-sm-3">
+                                        <span>Tempo:</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                      <input type="number" class="form-control" id="chordNumber" value="4">
+                                    </div>
+                                    <div class="col-sm-3">
+                                      <select id="instrument" class="form-control">                                                <option selected value="samplerPiano">Piano</option>
+                                            <option value="samplerGuitar">Guitar</option>
+                                          <option value="samplerSynth">Synth</option>
+                                          <option value="samplerCustom">Custom</option>
+                                      </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                      <select id="mainKey" class="form-control">
+                                          <option value="Ab">Ab</option>
+                                          <option value="A">A</option>
+                                          <option value="Bb">Bb</option>
+                                          <option value="B">B</option>
+                                          <option value="C" selected>C</option>
+                                          <option value="Db">Db</option>
+                                          <option value="D">D</option>
+                                          <option value="Eb">Eb</option>
+                                          <option value="E">E</option>
+                                          <option value="F">F</option>
+                                          <option value="Gb">Gb</option>
+                                          <option value="G">G</option>
+                                      </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                          <input type="number" class="form-control" id="tempo" value="120">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <span>Use Simple Pattern:</span>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="row" id="dropDown">
+                                        <a class="btn btn-light" data-toggle="collapse" href="#collapseMenu" id="moreOptions" role="button" aria-expanded="false" aria-controls="collapseMenu">More Options</a>
+                                    </div>
+                                    <div class="collapse" id="collapseMenu">
+                                        <div class="rounded-lg" id="degree">
+                                            <div class="row justify-content-center">
+                                                    <div class="line rounded-lg "></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                        <span class="rounded-sm" id="degreeCont">Degree:</span>
+                                                </div>
+                                                <div class="col-sm-4 btn-group">
+                                                    <select id="degreeType" class="form-control">
+                                                            <option value=0>Full Random</option>
+                                                            <option value=1>Custom Random</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-4">
+                                
+                                                </div>
+                                                <div class="col-sm-2 btn-group optionsButton">
+                                                    <a class="noMargin dropdown-toggle" data-toggle="collapse" href="#collapseDegree" id="moreOptions" role="button" aria-haspopup="true" aria-expanded="false" aria-controls="collapseDegree">
+                                                        <span>Weights</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="collapse" id="collapseDegree">
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <span class="white">1</span>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <input type="range" min="1" max="100" value="50" class="form-control-range" oninput="one_degree_range_disp.value = one_degree_range.value" id="one_degree_range">
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <output class="white" id="one_degree_range_disp">50</output>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                        <div class="col-sm-2">
+                                                            <span class="white">2</span>
+                                                        </div>
+                                                        <div class="col-sm-8">
+                                                            <input type="range" min="1" max="100" value="50" class="form-control-range" oninput="two_degree_range_disp.value = two_degree_range.value" id="two_degree_range">
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <output class="white" id="two_degree_range_disp">50</output>
+                                                        </div>
+                                                </div>
+                                                <div class="row">
+                                                        <div class="col-sm-2">
+                                                            <span class="white">3</span>
+                                                        </div>
+                                                        <div class="col-sm-8">
+                                                            <input type="range" min="1" max="100" value="50" class="form-control-range" oninput="three_degree_range_disp.value = three_degree_range.value" id="three_degree_range">
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <output class="white" id="three_degree_range_disp">50</output>
+                                                        </div>
+                                                </div>
+                                                <div class="row">
+                                                        <div class="col-sm-2">
+                                                            <span class="white">4</span>
+                                                        </div>
+                                                        <div class="col-sm-8">
+                                                            <input type="range" min="1" max="100" value="50" class="form-control-range" oninput="four_degree_range_disp.value = four_degree_range.value" id="four_degree_range">
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <output class="white" id="four_degree_range_disp">50</output>
+                                                        </div>
+                                                </div>
+                                                <div class="row">
+                                                        <div class="col-sm-2">
+                                                            <span class="white">5</span>
+                                                        </div>
+                                                        <div class="col-sm-8">
+                                                            <input type="range" min="1" max="100" value="50" class="form-control-range" oninput="five_degree_range_disp.value = five_degree_range.value" id="five_degree_range">
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <output class="white" id="five_degree_range_disp">50</output>
+                                                        </div>
+                                                </div>
+                                                <div class="row">
+                                                        <div class="col-sm-2">
+                                                            <span class="white">6</span>
+                                                        </div>
+                                                        <div class="col-sm-8">
+                                                            <input type="range" min="1" max="100" value="50" class="form-control-range" oninput="six_degree_range_disp.value = six_degree_range.value" id="six_degree_range">
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <output class="white" id="six_degree_range_disp">50</output>
+                                                        </div>
+                                                </div>
+                                                <div class="row">
+                                                        <div class="col-sm-2">
+                                                            <span class="white">7</span>
+                                                        </div>
+                                                        <div class="col-sm-8">
+                                                            <input type="range" min="1" max="100" value="50" class="form-control-range" oninput="seven_degree_range_disp.value = seven_degree_range.value" id="seven_degree_range">
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <output class="white" id="seven_degree_range_disp">50</output>
+                                                        </div>
+                                                </div>                 
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <div class="line rounded-lg "></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <span class="rounded-sm" id="degreeCont">Inversions:</span>
+                                                </div>
+                                                <div class="col-sm-4 btn-group">
+                                                    <select id="inversionType" class="form-control">
+                                                            <option value=0>None</option>
+                                                            <option value=1>Full Random</option>
+                                                            <option value=2>Custom Random</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-4">
+                            
+                                                </div>
+                                                <div class="col-sm-2 btn-group optionsButton">
+                                                    <a class="noMargin dropdown-toggle" data-toggle="collapse" href="#collapseInversion" id="moreOptions" role="button" aria-haspopup="true" aria-expanded="false" aria-controls="collapseDegree">
+                                                        <span>Weights</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="collapse" id="collapseInversion">
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <span class="white">1</span>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <input type="range" min="1" max="100" value="50" class="form-control-range" oninput="one_inversion_range_disp.value = one_inversion_range.value" id="one_inversion_range">
+                                                    </div>
+                                                <div class="col-sm-2">
+                                                        <output class="white" id="one_inversion_range_disp">50</output>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                        <div class="col-sm-2">
+                                                            <span class="white">2</span>
+                                                        </div>
+                                                        <div class="col-sm-8">
+                                                            <input type="range" min="1" max="100" value="50" class="form-control-range" oninput="two_inversion_range_disp.value = two_inversion_range.value" id="two_inversion_range">
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <output class="white" id="two_inversion_range_disp">50</output>
+                                                        </div>
+                                                </div>
+                                                <div class="row">
+                                                        <div class="col-sm-2">
+                                                            <span class="white">3</span>
+                                                        </div>
+                                                        <div class="col-sm-8">
+                                                            <input type="range" min="1" max="100" value="50" class="form-control-range" oninput="three_inversion_range_disp.value = three_inversion_range.value" id="three_inversion_range">
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <output class="white" id="three_inversion_range_disp">50</output>
+                                                        </div>
+                                                </div>            
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                    <div class="line rounded-lg "></div>
+                                            </div>
+                                            <div class="row">
+                                                    <div class="col-sm-2">
+                                                            <span class="rounded-sm" id="degreeCont">Octaves:</span>
+                                                    </div>
+                                                    <div class="col-sm-4 btn-group">
+                                                            <select id="octaveType" class="form-control">
+                                                                    <option value=0>Static</option>
+                                                                    <option value=1>Threshold</option>
+                                                                    <option value=2>Full Random</option>
+                                                                    <option value=3>Custom Random</option>
+                                                            </select>
+                                                    </div>
+                                                    <div class="col-sm-4" id="octaveOptionOne">
+                                                            <output id="range_weight_disp">Octave: 4</output>
+                                                            <input type="range" min="1" max="7" value="4" class="form-control-range" oninput="range_weight_disp.value = 'Octave: ' + range_weight.value" id="range_weight">
+                                                    </div>
+                                                    <div class="col-sm-2" hidden id="octaveOptionTwo">
+                                                        <p class="minMax">Min:</p>
+                                                        <select id="octaveMin" class="form-control">
+                                                                <option value=1>1</option>
+                                                                <option value=2>2</option>
+                                                                <option value=3>3</option>
+                                                                <option value=4 selected>4</option>
+                                                                <option value=5>5</option>
+                                                                <option value=6>6</option>
+                                                                <option value=7>7</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-2" hidden id="octaveOptionTwoTwo">
+                                                        <p class="minMax">Max:</p>
+                                                        <select id="octaveMax" class="form-control">
+                                                                <option value=1>1</option>
+                                                                <option value=2>2</option>
+                                                                <option value=3>3</option>
+                                                                <option value=4 selected>4</option>
+                                                                <option value=5>5</option>
+                                                                <option value=6>6</option>
+                                                                <option value=7>7</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-4" hidden id="octaveOptionThree">
+                                                    </div>
+                                                    <div class="col-sm-2 btn-group optionsButton">
+                                                        <a class="noMargin dropdown-toggle" data-toggle="collapse" href="#collapseOctave" id="moreOptions" role="button" aria-haspopup="true" aria-expanded="false" aria-controls="collapseDegree">
+                                                            <span>Weights</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="collapse" id="collapseOctave">
+                                                    <div class="row">
+                                                        <div class="col-sm-2">
+                                                            <span class="white">1</span>
+                                                        </div>
+                                                        <div class="col-sm-8">
+                                                            <input type="range" min="1" max="100" value="50" class="form-control-range" oninput="one_octave_range_disp.value = one_octave_range.value" id="one_octave_range">
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <output class="white" id="one_octave_range_disp">50</output>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                            <div class="col-sm-2">
+                                                                <span class="white">2</span>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <input type="range" min="1" max="100" value="50" class="form-control-range" oninput="two_octave_range_disp.value = two_octave_range.value" id="two_octave_range">
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <output class="white" id="two_octave_range_disp">50</output>
+                                                            </div>
+                                                    </div>
+                                                    <div class="row">
+                                                            <div class="col-sm-2">
+                                                                <span class="white">3</span>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <input type="range" min="1" max="100" value="50" class="form-control-range" oninput="three_octave_range_disp.value = three_octave_range.value" id="three_octave_range">
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <output class="white" id="three_octave_range_disp">50</output>
+                                                            </div>
+                                                    </div>
+                                                    <div class="row">
+                                                            <div class="col-sm-2">
+                                                                <span class="white">4</span>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <input type="range" min="1" max="100" value="50" class="form-control-range" oninput="four_octave_range_disp.value = four_octave_range.value" id="four_octave_range">
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <output class="white" id="four_octave_range_disp">50</output>
+                                                            </div>
+                                                    </div>
+                                                    <div class="row">
+                                                            <div class="col-sm-2">
+                                                                <span class="white">5</span>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <input type="range" min="1" max="100" value="50" class="form-control-range" oninput="five_octave_range_disp.value = five_octave_range.value" id="five_octave_range">
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <output class="white" id="five_octave_range_disp">50</output>
+                                                            </div>
+                                                    </div>
+                                                    <div class="row">
+                                                            <div class="col-sm-2">
+                                                                <span class="white">6</span>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <input type="range" min="1" max="100" value="50" class="form-control-range" oninput="six_octave_range_disp.value = six_octave_range.value" id="six_octave_range">
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <output class="white" id="six_octave_range_disp">50</output>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                            <div class="col-sm-2">
+                                                                <span class="white">7</span>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <input type="range" min="1" max="100" value="50" class="form-control-range" oninput="seven_octave_range_disp.value = seven_octave_range.value" id="seven_octave_range">
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <output class="white" id="seven_octave_range_disp">50</output>
+                                                            </div>
+                                                    </div>                 
+                                            </div>    
+                                            <div class="row justify-content-center">
+                                                    <div class="line rounded-lg "></div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              
+              </div>
+            </div>
+        <br>
+
+        <div id="functionsBar" class="row">
+            <div class="col-sm-3 justify-content-center" id="playButton1">
+                <a>
+                    <img onclick="playSong()" id="playButton" src="{% static '/images/playButton.png' %}">
+                    <img onclick="playSong()" hidden id="stopButton" src="{% static '/images/stopButton.png' %}">
+                </a>
+            </div>
+             <div class="col-sm-5 btn-group">
+                <button class="btn btn-dark" onclick="addChord1()" id="addChord">Add Chord</button>
+            </div>
+            <div class="col-sm-4 btn-group">
+                <button class="btn btn-dark" onclick="reset()" id="reset">Reset</button>
+            </div>
+        </div>
+
             <div class="container" id="chordSettings" hidden>
                 
                 <div class="row">
@@ -77,62 +639,9 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-sm-1">
-                <a onclick="playSong()">
-                    <img id="playButton" src="{% static '/images/playButton.png' %}">
-                    <img hidden id="stopButton" src="{% static '/images/stopButton.png' %}">
-                </a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-2">
-                <p>Number of Chords:</p>
-            </div>
-            <div class="col-sm-2">
-                <input type="number" class="form-control" id="chordNumber" value="4">
-            </div>
-            <div class="col-sm-1">
-                <p>Key:</p>
-            </div>
-            <div class="col-sm-2">
-                <select id="mainKey" class="form-control">
-                    <option value="Ab">Ab</option>
-                    <option value="A">A</option>
-                    <option value="Bb">Bb</option>
-                    <option value="B">B</option>
-                    <option value="C" selected>C</option>
-                    <option value="Db">Db</option>
-                    <option value="D">D</option>
-                    <option value="Eb">Eb</option>
-                    <option value="E">E</option>
-                    <option value="F">F</option>
-                    <option value="Gb">Gb</option>
-                    <option value="G">G</option>
-                </select>
-            </div>
-            <div class="col-sm-1">
-                <p>Tempo:</p>
-            </div>
-            <div class="col-sm-2">
-                <input type="number" class="form-control" id="tempo" value="120">
-            </div>
-            <div class="col-sm-2">
-                <select id="instrument" class="form-control">
-                    <option selected value="samplerPiano">Piano</option>
-                    <option value="samplerGuitar">Guitar</option>
-                    <option value="samplerSynth">Synth</option>
-                    <option value="samplerCustom">Custom</option>
-                </select>
-            </div>
-        </div>
-        <div class="row" id="playCont">
-                <button class="btn btn-dark" onclick="playSong()" id="playSong">Play Song</button>
-                <button class="btn btn-dark" onclick="addChord1()" id="addChord">Add Chord</button>
-                <button class="btn btn-dark" onclick="generateSong()" id="generateSong">Generate Full Random Song</button>
+        <div class="row" id="playCont" hidden>
                 <button class="btn btn-dark" onclick="generateSimpleSong()" id="generateSimpleSong">Generate Song</button>
                 <button class="btn btn-dark" onclick="generateCustomSong()" id="generateCustomSong">Generate Custom Song</button>
-                <button class="btn btn-dark" onclick="reset()" id="reset">Reset</button>
         </div>
         <div class="row" id="dropDown">
             <a class="btn btn-light" data-toggle="collapse" href="#collapseMenu" id="moreOptions" role="button" aria-expanded="false" aria-controls="collapseMenu">More Options</a>
@@ -460,6 +969,9 @@
         <div id="songCont">
 
         </div>
+
+        <br>
+        <br>
     </body>
     <script>
         var kawaiiPiano = "{% static 'samples/KawaiiUprightPiano' %}";
