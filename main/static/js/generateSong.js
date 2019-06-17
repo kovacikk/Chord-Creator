@@ -315,6 +315,8 @@ function addChord(key, degree, inversion, octave, defaultBool) {
     }
 
     song.appendChild(newChord);
+    newChord.scrollIntoView();
+    console.log("scroll");
 }
 
 //Function to Generate Song

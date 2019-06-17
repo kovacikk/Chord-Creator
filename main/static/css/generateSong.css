@@ -30,9 +30,6 @@ a {
 
 #degree {
     background-color: whitesmoke;
-    width: 60%;
-    margin-left: 3%;
-    margin-top: 1%;
 }
 
 .row {
@@ -81,7 +78,7 @@ span {
 .line {
     background-color: rgb(158, 157, 157);
     height: 2px;
-    width: 90%;
+    /*width: 90%;*/
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -106,10 +103,11 @@ img {
 }
 
 #playButton, #stopButton {
+    margin-top: 1vh;
+    margin-right: 1vh;
     cursor: pointer;
-    height: auto;
-    width: 8vw;
-    margin: auto;    
+    height: 8vh;
+    width: auto;
     display: block;
 }
 
@@ -159,5 +157,31 @@ input {
 }
 
 #functionsBar {
+    height: 10vh;
+    background-color: rgb(209, 208, 208);
+    margin-left: 1vw;
+    width: 35vw;
+}
+
+#accordion {
+    margin-left: 2vw;
+    margin-right: 2vw;
+    width: 96vw;
+}
+
+.top {
+    color:black;
+    font-weight: bold;
+}
+
+#addChord, #reset {
+    margin-bottom:  1vh;
+    margin-top: 1vh;
+    color: black;
+    background-color: white;
+}
+
+.playBar {
+    width: 100%;
 
 }
