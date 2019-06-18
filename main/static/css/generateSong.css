@@ -156,7 +156,7 @@ input {
     margin-top: 1.5vh;
 }
 
-#functionsBar {
+#functionsBar, #functionsBar2 {
     height: 10vh;
     background-color: rgb(209, 208, 208);
     margin-left: 1vw;

@@ -683,6 +683,24 @@
         </div>
 
         <br>
+        <div id="functionsBar2" hidden class="row rounded-lg">
+                <div class="col-sm-3 justify-content-center" id="playButton1">
+                    <a class="btn-group">
+                        <img onclick="playSong()" id="playButton" src="{% static '/images/playButton.png' %}">
+                        <img onclick="playSong()" hidden id="stopButton" src="{% static '/images/stopButton.png' %}">
+                    </a>
+                </div>
+                 <div class="col-sm-5 btn-group">
+                     <div class="btn-group playBar">
+                        <button class="btn btn-dark" onclick="addChord1()" id="addChord">Add Chord</button>
+                     </div>
+                </div>
+                <div class="col-sm-4 btn-group">
+                    <div class="btn-group playBar">
+                        <button class="btn btn-dark" onclick="reset()" id="reset">Reset</button>
+                    </div>
+                </div>
+            </div>
         <br>
     </body>
     <script>

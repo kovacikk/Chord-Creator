@@ -316,6 +316,16 @@ function addChord(key, degree, inversion, octave, defaultBool) {
 
     song.appendChild(newChord);
     newChord.scrollIntoView();
+
+    var playBar = document.getElementById("functionsBar");
+    if (isScrolledIntoView(playBar) == false) {
+        console.log("not in view");
+        var playBar2 = document.getElementById("functionsBar2");
+        playBar2.removeAttribute("hidden");
+    }
+    else {
+        playBar2.setAttribute("hidden", true);
+    }
     console.log("scroll");
 }
 
@@ -423,5 +433,17 @@ function reset() {
     //Tone.Transport.bpm.rampTo(bpm,1);
     //document.getElementById("tempo").value = bpm;
 
+    playBar2.setAttribute("hidden", true);
+}
 
+function isScrolledIntoView(el) {
+    var rect = el.getBoundingClientRect();
+    var elemTop = rect.top;
+    var elemBottom = rect.bottom;
+
+    // Only completely visible elements return true:
+    var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
+    // Partially visible elements return true:
+    //isVisible = elemTop < window.innerHeight && elemBottom >= 0;
+    return isVisible;
 }
