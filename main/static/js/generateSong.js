@@ -42,7 +42,7 @@ document.getElementById("tempoRandom").addEventListener('change', function() {
 //Simple Selections:
 var chordNumberSimple = 4;
 document.getElementById("chordNumberSimple").addEventListener('change', function() {
-    chordNumberRandom = document.getElementById("chordNumberSimple").value;
+    chordNumberSimple = document.getElementById("chordNumberSimple").value;
 });
 var instrumentSimple = "samplerPiano";
 document.getElementById("instrumentSimple").addEventListener('change', function() {
@@ -77,7 +77,7 @@ document.getElementById("isEndFiveSimple").addEventListener('change', function()
 //Custom Selections:
 var chordNumberCustom = 4;
 document.getElementById("chordNumberCustom").addEventListener('change', function() {
-    chordNumberRandom = document.getElementById("chordNumberCustom").value;
+    chordNumberCustom = document.getElementById("chordNumberCustom").value;
 });
 var instrumentCustom = "samplerPiano";
 document.getElementById("instrumentCustom").addEventListener('change', function() {
