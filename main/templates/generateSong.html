@@ -123,11 +123,15 @@
                                     <div class="col-sm-3">
                                         <span>Number of Chords:</span>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <span>Instrument:</span>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <span>Key:</span>                                        </div>
+                                    <div class="col-sm-2">
+                                        <span>Key:</span>                                        
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <span>Octave:</span>
+                                    </div>
                                     <div class="col-sm-3">
                                         <span>Tempo:</span>
                                     </div>
@@ -136,14 +140,14 @@
                                   <div class="col-sm-3">
                                     <input type="number" class="form-control" id="chordNumberSimple" value="4">
                                   </div>
-                                  <div class="col-sm-3">
+                                  <div class="col-sm-2">
                                     <select id="instrumentSimple" class="form-control">                                                <option selected value="samplerPiano">Piano</option>
                                         <option value="samplerGuitar">Guitar</option>
                                         <option value="samplerSynth">Synth</option>
                                         <option value="samplerCustom">Custom</option>
                                     </select>
                                   </div>
-                                  <div class="col-sm-3">
+                                  <div class="col-sm-2">
                                     <select id="mainKeySimple" class="form-control">
                                         <option value="Ab">Ab</option>
                                         <option value="A">A</option>
@@ -157,6 +161,17 @@
                                         <option value="F">F</option>
                                         <option value="Gb">Gb</option>
                                         <option value="G">G</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-sm-2">
+                                    <select id="octaveSimple" class="form-control">
+                                            <option value=1>1</option>
+                                            <option value=2>2</option>
+                                            <option value=3>3</option>
+                                            <option value=4 selected>4</option>
+                                            <option value=5>5</option>
+                                            <option value=6>6</option>
+                                            <option value=7>7</option>
                                     </select>
                                   </div>
                                   <div class="col-sm-3">
@@ -279,16 +294,22 @@
                                                             <option value=1>Custom Random</option>
                                                     </select>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-4" id="degreeOptionOne">
                                 
                                                 </div>
-                                                <div class="col-sm-2 btn-group optionsButton">
-                                                    <a class="noMargin dropdown-toggle" data-toggle="collapse" href="#collapseDegree" id="moreOptions" role="button" aria-haspopup="true" aria-expanded="false" aria-controls="collapseDegree">
+                                                <div class="col-sm-2" hidden id="degreeOptionTwo">
+
+                                                </div>
+                                                <div class="col-sm-2" hidden id="degreeOptionTwoTwo">
+                                                    <button class="btn btn-dark" onclick="resetWeightDegree()" id="reset">Reset</button>
+                                                </div>
+                                                <div class="col-sm-2 btn-group optionsButton" hidden id="degreeOptionTwoThree">
+                                                    <a class="noMargin dropdown-toggle" data-toggle="collapse" href="#collapseDegree" id="moreOptionsDegree" role="button" aria-haspopup="true" aria-expanded="false" aria-controls="collapseDegree">
                                                         <span>Weights</span>
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="collapse" id="collapseDegree">
+                                            <div class="collapse" id="collapseDegree" hidden>
                                                 <div class="row">
                                                     <div class="col-sm-2">
                                                         <span class="white">1</span>
@@ -381,16 +402,22 @@
                                                             <option value=2>Custom Random</option>
                                                     </select>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-4" id="inversionOptionOne">
                             
                                                 </div>
-                                                <div class="col-sm-2 btn-group optionsButton">
+                                                <div class="col-sm-2" hidden id="inversionOptionTwo">
+
+                                                </div>
+                                                <div class="col-sm-2" hidden id="inversionOptionTwoTwo">
+                                                    <button class="btn btn-dark" onclick="resetWeightInversion()" id="reset">Reset</button>
+                                                </div>
+                                                <div class="col-sm-2 btn-group optionsButton" hidden id="inversionOptionTwoThree">
                                                     <a class="noMargin dropdown-toggle" data-toggle="collapse" href="#collapseInversion" id="moreOptions" role="button" aria-haspopup="true" aria-expanded="false" aria-controls="collapseDegree">
                                                         <span>Weights</span>
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="collapse" id="collapseInversion">
+                                            <div class="collapse" id="collapseInversion" hidden>
                                                 <div class="row">
                                                     <div class="col-sm-2">
                                                         <span class="white">1</span>
@@ -441,8 +468,8 @@
                                                             </select>
                                                     </div>
                                                     <div class="col-sm-4" id="octaveOptionOne">
-                                                            <output id="range_weight_disp">Octave: 4</output>
-                                                            <input type="range" min="1" max="7" value="4" class="form-control-range" oninput="range_weight_disp.value = 'Octave: ' + range_weight.value" id="range_weight">
+                                                            <output id="static_range_weight_disp">Octave: 4</output>
+                                                            <input type="range" min="1" max="7" value="4" class="form-control-range" oninput="static_range_weight_disp.value = 'Octave: ' + static_range_weight.value" id="static_range_weight">
                                                     </div>
                                                     <div class="col-sm-2" hidden id="octaveOptionTwo">
                                                         <p class="minMax">Min:</p>
@@ -470,13 +497,19 @@
                                                     </div>
                                                     <div class="col-sm-4" hidden id="octaveOptionThree">
                                                     </div>
-                                                    <div class="col-sm-2 btn-group optionsButton">
+                                                    <div class="col-sm-2" hidden id="octaveOptionFour">
+
+                                                    </div>
+                                                    <div class="col-sm-2" hidden id="octaveOptionFourTwo" class="btn-group">
+                                                        <button class="btn btn-dark" onclick="resetWeightOctave()" id="reset">Reset</button>
+                                                    </div>
+                                                    <div class="col-sm-2 btn-group optionsButton" hidden id="octaveOptionFourThree">
                                                         <a class="noMargin dropdown-toggle" data-toggle="collapse" href="#collapseOctave" id="moreOptions" role="button" aria-haspopup="true" aria-expanded="false" aria-controls="collapseDegree">
                                                             <span>Weights</span>
                                                         </a>
                                                     </div>
                                                 </div>
-                                                <div class="collapse" id="collapseOctave">
+                                                <div class="collapse" id="collapseOctave" hidden>
                                                     <div class="row">
                                                         <div class="col-sm-2">
                                                             <span class="white">1</span>

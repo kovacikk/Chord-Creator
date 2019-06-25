@@ -1,6 +1,8 @@
 document.getElementById("addChord").addEventListener('click', selectReset, false);
 //document.getElementById("tempo").addEventListener('change', updateTempo);
-//document.getElementById("octaveType").addEventListener('change', updateView);
+document.getElementById("degreeType").addEventListener('change', updateDegreeView);
+document.getElementById("inversionType").addEventListener('change', updateInversionView);
+document.getElementById("octaveType").addEventListener('change', updateOctaveView);
 //document.getElementById("instrument").addEventListener('change', updateInstrument);
 
 var isPlay = false;
@@ -50,6 +52,10 @@ var mainKeySimple = "C";
 document.getElementById("mainKeySimple").addEventListener('change', function() {
     mainKeyRandom = document.getElementById("mainKeySimple").value;
 });
+var octaveSimple = 4;
+document.getElementById("octaveSimple").addEventListener('change', function(){
+    octaveSimple = document.getElementById("octaveSimple").value;
+});
 var tempoSimple = 120;
 document.getElementById("tempoSimple").addEventListener('change', function() {
     updateTempo("Simple");
@@ -85,15 +91,15 @@ var tempoCustom = 120;
 document.getElementById("tempoCustom").addEventListener('change', function() {
     updateTempo("Custom");
 });
-var isSimpleCustom = true;
+var isSimpleCustom = false;
 document.getElementById("isSimpleCustom").addEventListener('change', function() {
     isSimpleCustom = document.getElementById("isSimpleCustom").checked;
 });
-var isStartOneCustom = true;
+var isStartOneCustom = false;
 document.getElementById("isStartOneCustom").addEventListener('change', function() {
     isStartOneCustom = document.getElementById("isStartOneCustom").checked;
 });
-var isEndFiveCustom = true;
+var isEndFiveCustom = false;
 document.getElementById("isEndFiveCustom").addEventListener('change', function() {
     isEndFiveCustom = document.getElementById("isEndFiveCustom").checked;
 });
@@ -143,15 +149,69 @@ function addChord1() {
     addChord(0,0,0,0,1);
 }
 
-function updateView() {
+function updateDegreeView() {
+    var degreeOption = document.getElementById("degreeType").value;
+
+    var collapseDegree = document.getElementById("collapseDegree");
+    var degreeOptionOne = document.getElementById("degreeOptionOne");
+    var degreeOptionTwo = document.getElementById("degreeOptionTwo");
+    var degreeOptionTwoTwo = document.getElementById("degreeOptionTwoTwo");
+    var degreeOptionTwoThree = document.getElementById("degreeOptionTwoThree");
+
+    if (degreeOption == 0) {
+        degreeOptionOne.removeAttribute("hidden");
+        degreeOptionTwo.setAttribute("hidden", true);
+        degreeOptionTwoTwo.setAttribute("hidden", true);
+        degreeOptionTwoThree.setAttribute("hidden", true);
+        collapseDegree.setAttribute("hidden", true);
+    }
+    else {
+        degreeOptionOne.setAttribute("hidden", true);
+        degreeOptionTwo.removeAttribute("hidden");
+        degreeOptionTwoTwo.removeAttribute("hidden");
+        degreeOptionTwoThree.removeAttribute("hidden");
+        collapseDegree.removeAttribute("hidden");
+    }
+}
+
+function updateInversionView() {
+    var inversionOption = document.getElementById("inversionType").value;
+
+    var collapseInversion = document.getElementById("collapseInversion");
+    var inversionOptionOne = document.getElementById("inversionOptionOne");
+    var inversionOptionTwo = document.getElementById("inversionOptionTwo");
+    var inversionOptionTwoTwo = document.getElementById("inversionOptionTwoTwo");
+    var inversionOptionTwoThree = document.getElementById("inversionOptionTwoThree");
+
+    if (inversionOption == 0 || inversionOption == 1) {
+        inversionOptionOne.removeAttribute("hidden");
+        inversionOptionTwo.setAttribute("hidden", true);
+        inversionOptionTwoTwo.setAttribute("hidden", true);
+        inversionOptionTwoThree.setAttribute("hidden", true);
+        collapseInversion.setAttribute("hidden", true);
+    }
+    else {
+        inversionOptionOne.setAttribute("hidden", true);
+        inversionOptionTwo.removeAttribute("hidden");
+        inversionOptionTwoTwo.removeAttribute("hidden");
+        inversionOptionTwoThree.removeAttribute("hidden");
+        collapseInversion.removeAttribute("hidden");
+    }
+}
+
+function updateOctaveView() {
     console.log("hey");
     var octaveOption = document.getElementById("octaveType").value;
     console.log(octaveOption);
 
+    var collapseOctave = document.getElementById("collapseOctave");
     var octaveOptionOne = document.getElementById("octaveOptionOne");
     var octaveOptionTwo = document.getElementById("octaveOptionTwo");
     var octaveOptionTwoTwo = document.getElementById("octaveOptionTwoTwo");
     var octaveOptionThree = document.getElementById("octaveOptionThree");
+    var octaveOptionFour = document.getElementById("octaveOptionFour");
+    var octaveOptionFourTwo = document.getElementById("octaveOptionFourTwo");
+    var octaveOptionFourThree = document.getElementById("octaveOptionFourThree");
 
     if (octaveOption == 0) {
         console.log("one");
@@ -159,19 +219,42 @@ function updateView() {
         octaveOptionTwo.setAttribute("hidden", true);
         octaveOptionTwoTwo.setAttribute("hidden", true);
         octaveOptionThree.setAttribute("hidden", true);
+        octaveOptionFour.setAttribute("hidden", true);
+        octaveOptionFourTwo.setAttribute("hidden", true);
+        octaveOptionFourThree.setAttribute("hidden", true);
+        collapseOctave.setAttribute("hidden", true);
     }else if (octaveOption == 1) {
         console.log("2");
         octaveOptionOne.setAttribute("hidden", true);
         octaveOptionTwo.removeAttribute("hidden");
         octaveOptionTwoTwo.removeAttribute("hidden", true);
         octaveOptionThree.setAttribute("hidden", true);
+        octaveOptionFour.setAttribute("hidden", true);
+        octaveOptionFourTwo.setAttribute("hidden", true);
+        octaveOptionFourThree.setAttribute("hidden", true);
+        collapseOctave.setAttribute("hidden", true);
     }
-    else {
+    else if (octaveOption == 2) {
         console.log("3");
         octaveOptionOne.setAttribute("hidden", true);
         octaveOptionTwo.setAttribute("hidden", true);
         octaveOptionTwoTwo.setAttribute("hidden", true);
         octaveOptionThree.removeAttribute("hidden");
+        octaveOptionFour.setAttribute("hidden", true);
+        octaveOptionFourTwo.setAttribute("hidden", true);
+        octaveOptionFourThree.setAttribute("hidden", true);
+        collapseOctave.setAttribute("hidden", true);
+    }
+    else {
+        console.log("4");
+        octaveOptionOne.setAttribute("hidden", true);
+        octaveOptionTwo.setAttribute("hidden", true);
+        octaveOptionTwoTwo.setAttribute("hidden", true);
+        octaveOptionThree.setAttribute("hidden", true);
+        octaveOptionFour.removeAttribute("hidden");
+        octaveOptionFourTwo.removeAttribute("hidden");
+        octaveOptionFourThree.removeAttribute("hidden");
+        collapseOctave.removeAttribute("hidden");
     }
 }
 
@@ -601,7 +684,7 @@ function generateSimpleSong() {
             inversion = Math.floor(Math.random() * 3);
         }    
 
-        addChord(key, array[k], inversion, 4, 0);
+        addChord(key, array[k], inversion, octaveSimple, 0);
     }
 
     selectReset();
@@ -613,7 +696,147 @@ function nothing() {
 
 function generateCustomSong() {
     console.log("GenerateCustomSong");
+    buildArrays();
+    //console.log(degreeWeights);
+    //console.log(inversionWeights);
+    //console.log(octaveWeights);
 
+    reset();
+    var key = mainKeyCustom;
+    var chordNumber = chordNumberCustom;
+
+    //Simple Pattern
+    if (isSimpleCustom) {
+
+    } //Custom Pattern
+    else {
+        for (k = 0; k < chordNumber; k++) {
+            var degree = 4;
+            var inversion = 0;
+            var octave = 4;
+            
+            //Random Degrees
+            if (document.getElementById("degreeType").value == 0) {
+                degree = Math.floor(Math.random() * 7) + 1;
+            }//Custom Degrees
+            else {
+                var sum = degreeWeights[0] + degreeWeights[1] + degreeWeights[2] + degreeWeights[3] + degreeWeights[4] + degreeWeights[5] + degreeWeights[6];
+                console.log(sum);
+                var number = Math.floor(Math.random() * sum) + 1;
+                console.log(number);
+                if (number >= 1 && number <= degreeWeights[0]) {
+                    degree = 1;
+                }
+                else if (number >= degreeWeights[0] + 1 && number <= degreeWeights[0] + degreeWeights[1]) {
+                    degree = 2;
+                }
+                else if (number >= degreeWeights[0] + degreeWeights[1] + 1 && number <= degreeWeights[0] + degreeWeights[1] + degreeWeights[2]) {
+                    degree = 3;
+                }
+                else if (number >= degreeWeights[0] + degreeWeights[1] + degreeWeights[2] + 1 && number <= degreeWeights[0] + degreeWeights[1] + degreeWeights[2] + degreeWeights[3]) {
+                    degree = 4;
+                }
+                else if (number >= degreeWeights[0] + degreeWeights[1] + degreeWeights[2] + degreeWeights[3] + 1 && number <= degreeWeights[0] + degreeWeights[1] + degreeWeights[2] + degreeWeights[3] + degreeWeights[4]) {
+                    degree = 5;
+                }
+                else if (number >= degreeWeights[0] + degreeWeights[1] + degreeWeights[2] + degreeWeights[3] + degreeWeights[4] + 1 && number <= degreeWeights[0] + degreeWeights[1] + degreeWeights[2] + degreeWeights[3] + degreeWeights[4] + degreeWeights[5]) {
+                    degree = 6;
+                }
+                else {
+                    degree = 7;
+                }
+            }
+
+            //None
+            if (document.getElementById("inversionType").value == 0) {
+                inversion = 0;
+            }//Full Random
+            else if (document.getElementById("inversionType").value == 1) {
+                inversion = Math.floor(Math.random() * 3);
+            }//Custom Random
+            else {
+                var sum = inversionWeights[0] + inversionWeights[1] + inversionWeights[2];
+                var number = Math.floor(Math.random() * sum) + 1;
+
+                if (number >= 1 && number <= inversionWeights[0]) {
+                    inversion = 0;
+                }
+                else if (number >= inversionWeights[0] + 1 && number <= inversionWeights[0] + inversionWeights[1]) {
+                    inversion = 1;
+                }
+                else {
+                    inversion = 2;
+                }
+            }
+
+            //Static
+            if (document.getElementById("octaveType").value == 0) {
+                octave = document.getElementById("static_range_weight").value;
+            }//Threshold
+            else if (document.getElementById("octaveType").value == 1) {
+                var min = parseInt(document.getElementById("octaveMin").value, 10);
+                var max = parseInt(document.getElementById("octaveMax").value, 10);
+
+                octave = Math.floor(Math.random() * (max - min + 1)+ min);
+            }//Full Random
+            else if (document.getElementById("octaveType").value == 2) {
+                octave = Math.floor(Math.random() * 7) + 1;
+            }//Custom Random
+            else {
+                var sum = octaveWeights[0] + octaveWeights[1] + octaveWeights[2] + octaveWeights[3] + octaveWeights[4] + octaveWeights[5] + octaveWeights[6];
+                var number = Math.floor(Math.random() * sum) + 1;
+                
+                if (number >= 1 && number <= octaveWeights[0]) {
+                    octave = 1;
+                }
+                else if (number >= octaveWeights[0] + 1 && number <= octaveWeights[0] + octaveWeights[1]) {
+                    octave = 2;
+                }
+                else if (number >= octaveWeights[0] + octaveWeights[1] + 1 && number <= octaveWeights[0] + octaveWeights[1] + octaveWeights[2]) {
+                    octave = 3;
+                }
+                else if (number >= octaveWeights[0] + octaveWeights[1] + octaveWeights[2] + 1 && number <= octaveWeights[0] + octaveWeights[1] + octaveWeights[2] + octaveWeights[3]) {
+                    octave = 4;
+                }
+                else if (number >= octaveWeights[0] + octaveWeights[1] +octaveWeights[2] + octaveWeights[3] + 1 && number <= octaveWeights[0] + octaveWeights[1] + octaveWeights[2] + octaveWeights[3] + octaveWeights[4]) {
+                    octave = 5;
+                }
+                else if (number >= octaveWeights[0] + octaveWeights[1] + octaveWeights[2] + octaveWeights[3] + octaveWeights[4] + 1 && number <= octaveWeights[0] + octaveWeights[1] + octaveWeights[2] + octaveWeights[3] + octaveWeights[4] + octaveWeights[5]) {
+                    octave = 6;
+                }
+                else {
+                    octave = 7;
+                }
+            }
+
+            console.log(key, degree, inversion, octave);
+            addChord(key, degree, inversion, octave, 0);
+        }
+    }
+
+    selectReset();
+}
+
+function buildArrays() {
+    degreeWeights[0] = parseInt(document.getElementById("one_degree_range_disp").value,10);
+    degreeWeights[1] = parseInt(document.getElementById("two_degree_range_disp").value,10);
+    degreeWeights[2] = parseInt(document.getElementById("three_degree_range_disp").value,10);
+    degreeWeights[3] = parseInt(document.getElementById("four_degree_range_disp").value,10);
+    degreeWeights[4] = parseInt(document.getElementById("five_degree_range_disp").value,10);
+    degreeWeights[5] = parseInt(document.getElementById("six_degree_range_disp").value,10);
+    degreeWeights[6] = parseInt(document.getElementById("seven_degree_range_disp").value,10);
+
+    inversionWeights[0] = parseInt(document.getElementById("one_inversion_range_disp").value,10);
+    inversionWeights[1] = parseInt(document.getElementById("two_inversion_range_disp").value,10);
+    inversionWeights[2] = parseInt(document.getElementById("three_inversion_range_disp").value,10);
+
+    octaveWeights[0] = parseInt(document.getElementById("one_octave_range_disp").value,10);
+    octaveWeights[1] = parseInt(document.getElementById("two_octave_range_disp").value,10);
+    octaveWeights[2] = parseInt(document.getElementById("three_octave_range_disp").value,10);
+    octaveWeights[3] = parseInt(document.getElementById("four_octave_range_disp").value,10);
+    octaveWeights[4] = parseInt(document.getElementById("five_octave_range_disp").value,10);
+    octaveWeights[5] = parseInt(document.getElementById("six_octave_range_disp").value,10);
+    octaveWeights[6] = parseInt(document.getElementById("seven_octave_range_disp").value,10);
 }
 
 function reset() {
@@ -648,4 +871,60 @@ function isScrolledIntoView(el) {
     // Partially visible elements return true:
     //isVisible = elemTop < window.innerHeight && elemBottom >= 0;
     return isVisible;
+}
+
+function resetWeightDegree() {
+    for (i = 0; i < degreeWeights.length; i++) {
+        degreeWeights[i] = 50;
+    }
+    document.getElementById("one_degree_range").value = 50;
+    document.getElementById("two_degree_range").value = 50;
+    document.getElementById("three_degree_range").value = 50;
+    document.getElementById("four_degree_range").value = 50;
+    document.getElementById("five_degree_range").value = 50;
+    document.getElementById("six_degree_range").value = 50;
+    document.getElementById("seven_degree_range").value = 50;
+
+    document.getElementById("one_degree_range_disp").value = 50;
+    document.getElementById("two_degree_range_disp").value = 50;
+    document.getElementById("three_degree_range_disp").value = 50;
+    document.getElementById("four_degree_range_disp").value = 50;
+    document.getElementById("five_degree_range_disp").value = 50;
+    document.getElementById("six_degree_range_disp").value = 50;
+    document.getElementById("seven_degree_range_disp").value = 50;
+}
+
+function resetWeightInversion() {
+    for (i = 0; i < inversionWeights.length; i++) {
+        inversionWeights[i] = 50;
+    }
+
+    document.getElementById("one_inversion_range").value = 50;
+    document.getElementById("two_inversion_range").value = 50;
+    document.getElementById("three_inversion_range").value = 50;
+
+    document.getElementById("one_inversion_range_disp").value = 50;
+    document.getElementById("two_inversion_range_disp").value = 50;
+    document.getElementById("three_inversion_range_disp").value = 50;
+}
+
+function resetWeightOctave() {
+    for (i = 0; i < octaveWeights.length; i++) {
+        octaveWeights[i] = 50;
+    }
+    document.getElementById("one_octave_range").value = 50;
+    document.getElementById("two_octave_range").value = 50;
+    document.getElementById("three_octave_range").value = 50;
+    document.getElementById("four_octave_range").value = 50;
+    document.getElementById("five_octave_range").value = 50;
+    document.getElementById("six_octave_range").value = 50;
+    document.getElementById("seven_octave_range").value = 50;
+
+    document.getElementById("one_octave_range_disp").value = 50;
+    document.getElementById("two_octave_range_disp").value = 50;
+    document.getElementById("three_octave_range_disp").value = 50;
+    document.getElementById("four_octave_range_disp").value = 50;
+    document.getElementById("five_octave_range_disp").value = 50;
+    document.getElementById("six_octave_range_disp").value = 50;
+    document.getElementById("seven_octave_range_disp").value = 50;
 }
