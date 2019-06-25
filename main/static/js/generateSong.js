@@ -1,12 +1,130 @@
 document.getElementById("addChord").addEventListener('click', selectReset, false);
-document.getElementById("tempo").addEventListener('change', updateTempo);
-document.getElementById("octaveType").addEventListener('change', updateView);
-document.getElementById("instrument").addEventListener('change', updateInstrument);
+//document.getElementById("tempo").addEventListener('change', updateTempo);
+//document.getElementById("octaveType").addEventListener('change', updateView);
+//document.getElementById("instrument").addEventListener('change', updateInstrument);
 
 var isPlay = false;
 var counter = 0;
 var bpm = 120;
 var sampler = samplerPiano;
+
+var selection = "Random";
+document.getElementById("fullRandomSelection").addEventListener('click', function() {
+    updateSelection("Random");
+});
+document.getElementById("simpleSelection").addEventListener('click', function() {
+    updateSelection("Simple");
+});
+document.getElementById("customSelection").addEventListener('click', function() {
+    updateSelection("Custom");
+});
+
+//Random Selections:
+var chordNumberRandom = 4;
+document.getElementById("chordNumberRandom").addEventListener('change', function() {
+    chordNumberRandom = document.getElementById("chordNumberRandom").value;
+});
+var instrumentRandom = "samplerPiano";
+document.getElementById("instrumentRandom").addEventListener('change', function() {
+    updateInstrument("Random");
+});
+var mainKeyRandom = "C";
+document.getElementById("mainKeyRandom").addEventListener('change', function() {
+mainKeyRandom = document.getElementById("mainKeyRandom").value;
+});
+var tempoRandom = 120;
+document.getElementById("tempoRandom").addEventListener('change', function() {
+    updateTempo("Random");
+});
+
+//Simple Selections:
+var chordNumberSimple = 4;
+document.getElementById("chordNumberSimple").addEventListener('change', function() {
+    chordNumberRandom = document.getElementById("chordNumberSimple").value;
+});
+var instrumentSimple = "samplerPiano";
+document.getElementById("instrumentSimple").addEventListener('change', function() {
+    updateInstrument("Simple");
+});
+var mainKeySimple = "C";
+document.getElementById("mainKeySimple").addEventListener('change', function() {
+    mainKeyRandom = document.getElementById("mainKeySimple").value;
+});
+var tempoSimple = 120;
+document.getElementById("tempoSimple").addEventListener('change', function() {
+    updateTempo("Simple");
+});
+var isInversionsSimple = false;
+document.getElementById("isInversionsSimple").addEventListener('change', function() {
+    isInversionsSimple = document.getElementById("isInversionsSimple").checked;
+});
+var isStartOneSimple = true;
+document.getElementById("isStartOneSimple").addEventListener('change', function() {
+    isStartOneSimple = document.getElementById("isStartOneSimple").checked;
+});
+var isEndFiveSimple = true;
+document.getElementById("isEndFiveSimple").addEventListener('change', function() {
+    //console.log(document.getElementById("isEndFiveSimple").checked);
+    isEndFiveSimple = document.getElementById("isEndFiveSimple").checked;
+});
+
+//Custom Selections:
+var chordNumberCustom = 4;
+document.getElementById("chordNumberCustom").addEventListener('change', function() {
+    chordNumberRandom = document.getElementById("chordNumberCustom").value;
+});
+var instrumentCustom = "samplerPiano";
+document.getElementById("instrumentCustom").addEventListener('change', function() {
+    updateInstrument("Custom");
+});
+var mainKeyCustom = "C";
+document.getElementById("mainKeyCustom").addEventListener('change', function() {
+    mainKeyRandom = document.getElementById("mainKeyCustom").value;
+});
+var tempoCustom = 120;
+document.getElementById("tempoCustom").addEventListener('change', function() {
+    updateTempo("Custom");
+});
+var isSimpleCustom = true;
+document.getElementById("isSimpleCustom").addEventListener('change', function() {
+    isSimpleCustom = document.getElementById("isSimpleCustom").checked;
+});
+var isStartOneCustom = true;
+document.getElementById("isStartOneCustom").addEventListener('change', function() {
+    isStartOneCustom = document.getElementById("isStartOneCustom").checked;
+});
+var isEndFiveCustom = true;
+document.getElementById("isEndFiveCustom").addEventListener('change', function() {
+    isEndFiveCustom = document.getElementById("isEndFiveCustom").checked;
+});
+
+var degreeType = 0;
+var degreeWeights = [50,50,50,50,50,50,50];
+
+var inversionType = 0;
+var inversionWeights = [50,50,50];
+
+var octaveType = 0;
+var staticOctave = 4;
+var octaveMin = 1;
+var octaveMax = 7;
+var octaveWeights = [50,50,50,50,50,50,50];
+
+function updateSelection(type) {
+    if (type == "Random") {
+        selection = "Random";
+    }
+    else if (type == "Simple") {
+        selection = "Simple";
+    }
+    else {
+        selection = "Custom";
+    }
+
+    if (isPlay) {
+        playSong();
+    }
+}
 
 function selectPlay() {
     if (isPlay) {
@@ -57,8 +175,18 @@ function updateView() {
     }
 }
 
-function updateInstrument() {
-    sampler = document.getElementById("instrument").value;
+function updateInstrument(type) {
+    if (type == "Random") {
+        instrumentRandom = document.getElementById("instrumentRandom").value;
+        sampler = instrumentRandom;
+    } else if (type == "Simple") {
+        instrumentSimple = document.getElementById("instrumentSimple").value;
+        sampler = instrumentSimple;
+    } else {
+        instrumentCustom = document.getElementById("instrumentCustom").value;
+        sampler = instrumentCustom;
+    }
+
     if (sampler == "samplerGuitar") {
         sampler = samplerGuitar;
     }
@@ -70,16 +198,29 @@ function updateInstrument() {
     }
 }
 
-function updateTempo() {
+function updateTempo(type) {
+    if (type == "Random") {
+        tempoRandom = document.getElementById("tempoRandom").value;
+        Tone.Transport.bpm.rampTo(tempoRandom, 1);
+        bpm = tempoRandom;
+    } else if (type == "Simple") {
+        tempoSimple = document.getElementById("tempoSimple").value;
+        Tone.Transport.bpm.rampTo(tempoSimple, 1);
+        bpm = tempoSimple;
+    } else {
+        tempoCustom = document.getElementById("tempoCustom").value;
+        Tone.Transport.bpm.rampTo(tempoCustom, 1);
+        bpm = tempoCustom;
+    }
 
-    bpm = document.getElementById("tempo").value;
+    //bpm = document.getElementById("tempo").value;
     //Tone.Transport.bpm = bpm;
-    Tone.Transport.bpm.rampTo(bpm, 1);
+    //Tone.Transport.bpm.rampTo(bpm, 1);
     
     //if (isPlay) {
     //    play();
     //}
-    console.log(document.getElementById("tempo").value);
+    //console.log(document.getElementById("tempo").value);
 }
 
 
@@ -155,7 +296,6 @@ function playTriad(counterString) {
     console.log(triad);
 
     sampler.triggerAttackRelease(triad, "4n");
-
 }
 
 function playSong() {
@@ -181,6 +321,43 @@ function play() {
     Tone.Transport.cancel();
     //Tone.Transport.stop();
     var triadArray = [];
+
+    console.log(selection);
+    if (selection == "Random") {
+        if (instrumentRandom == "samplerGuitar") {
+            sampler = samplerGuitar;
+        }
+        else if (instrumentRandom == "samplerPiano") {
+            sampler = samplerPiano;
+        }
+        else if (instrumentRandom == "samplerSynth") {
+            sampler = samplerSynth;
+        }
+        bpm = tempoRandom;
+    }else if (selection == "Simple") {
+        console.log(instrumentSimple);
+        if (instrumentSimple == "samplerGuitar") {
+            sampler = samplerGuitar;
+        }
+        else if (instrumentSimple == "samplerPiano") {
+            sampler = samplerPiano;
+        }
+        else if (instrumentSimple == "samplerSynth") {
+            sampler = samplerSynth;
+        }
+        bpm = tempoSimple;
+    }else {
+        if (instrumentCustom == "samplerGuitar") {
+            sampler = samplerGuitar;
+        }
+        else if (instrumentCustom == "samplerPiano") {
+            sampler = samplerPiano;
+        }
+        else if (instrumentCustom == "samplerSynth") {
+            sampler = samplerSynth;
+        }
+        bpm = tempoCustom;
+    }
 
     for (i = 0; i < counter; i++) {
         var counterString = (i + 1);
@@ -251,7 +428,7 @@ function play() {
     console.log("Bpm:" + bpm);
 
     Tone.Transport.bpm = bpm;
-    //Tone.Transport.bpm.rampTo(bpm, 1);
+    Tone.Transport.bpm.rampTo(bpm, 1);
     Tone.Transport.start();
 }
 
@@ -318,9 +495,10 @@ function addChord(key, degree, inversion, octave, defaultBool) {
     newChord.scrollIntoView();
 
     var playBar = document.getElementById("functionsBar");
+    var playBar2 = document.getElementById("functionsBar2");
+
     if (isScrolledIntoView(playBar) == false) {
         console.log("not in view");
-        var playBar2 = document.getElementById("functionsBar2");
         playBar2.removeAttribute("hidden");
     }
     else {
@@ -330,10 +508,10 @@ function addChord(key, degree, inversion, octave, defaultBool) {
 }
 
 //Function to Generate Song
-function generateSong() {
+function generateRandomSong() {
     reset();
-    var key = document.getElementById("mainKey").value;
-    var chordNumber = document.getElementById("chordNumber").value;
+    var key = mainKeyRandom;
+    var chordNumber = chordNumberRandom;
 
     //Full Random
     for (k = 0; k < chordNumber; k++) {
@@ -349,14 +527,23 @@ function generateSong() {
 
 function generateSimpleSong() {
     reset();
-    var key = document.getElementById("mainKey").value;
-    var chordNumber = document.getElementById("chordNumber").value;
+    var key = mainKeySimple;
+    var chordNumber = chordNumberSimple;
 
     var isGood = 0;
     var array = new Array(chordNumber);
-    array[0] = 1;
+    
     //Attempt to make a song
     while(isGood == 0) {
+        
+        //Check if Start on One
+        if (isStartOneSimple) {
+            array[0] = 1;
+        }
+        else {
+            array[0] = Math.floor(Math.random() *7) + 1;
+        }
+
         for (k = 1; k < chordNumber; k++) {
             //Previous Chord was 1
             if (array[k-1] == 1) {
@@ -396,22 +583,37 @@ function generateSimpleSong() {
             }
         }
 
-        //Check if chord structure works
-        if ((array[chordNumber - 1] == 5) || array[chordNumber - 1] == 7) {
+        //onsole.log("IsEnd: " + isEndFiveSimple);
+
+        //Check if end on five or Seven
+        if (isEndFiveSimple == false || (array[chordNumber - 1] == 5) || array[chordNumber - 1] == 7) {
             isGood = 1;
+        }else {
+            setTimeout(nothing,1);
         }
     }
+    var inversion = 0;
 
     for (k = 0; k < chordNumber; k++) {
         //Add Inversions and Octave Stuff
-        addChord(key, array[k], 0, 4, 0);
+
+        if (isInversionsSimple) {
+            inversion = Math.floor(Math.random() * 3);
+        }    
+
+        addChord(key, array[k], inversion, 4, 0);
     }
 
     selectReset();
 }
 
+function nothing() {
+
+}
+
 function generateCustomSong() {
     console.log("GenerateCustomSong");
+
 }
 
 function reset() {
@@ -432,7 +634,7 @@ function reset() {
     //bpm = 120;
     //Tone.Transport.bpm.rampTo(bpm,1);
     //document.getElementById("tempo").value = bpm;
-
+    var playBar2 = document.getElementById("functionsBar2");
     playBar2.setAttribute("hidden", true);
 }
 
