@@ -32,7 +32,7 @@ document.getElementById("instrumentRandom").addEventListener('change', function(
 });
 var mainKeyRandom = "C";
 document.getElementById("mainKeyRandom").addEventListener('change', function() {
-mainKeyRandom = document.getElementById("mainKeyRandom").value;
+    mainKeyRandom = document.getElementById("mainKeyRandom").value;
 });
 var tempoRandom = 120;
 document.getElementById("tempoRandom").addEventListener('change', function() {
@@ -50,7 +50,7 @@ document.getElementById("instrumentSimple").addEventListener('change', function(
 });
 var mainKeySimple = "C";
 document.getElementById("mainKeySimple").addEventListener('change', function() {
-    mainKeyRandom = document.getElementById("mainKeySimple").value;
+    mainKeySimple = document.getElementById("mainKeySimple").value;
 });
 var octaveSimple = 4;
 document.getElementById("octaveSimple").addEventListener('change', function(){
@@ -85,7 +85,7 @@ document.getElementById("instrumentCustom").addEventListener('change', function(
 });
 var mainKeyCustom = "C";
 document.getElementById("mainKeyCustom").addEventListener('change', function() {
-    mainKeyRandom = document.getElementById("mainKeyCustom").value;
+    mainKeyCustom = document.getElementById("mainKeyCustom").value;
 });
 var tempoCustom = 120;
 document.getElementById("tempoCustom").addEventListener('change', function() {
@@ -562,13 +562,30 @@ function addChord(key, degree, inversion, octave, defaultBool) {
     };
 
     if (defaultBool) {
-        newKey.value = document.getElementById("mainKey").value;
+        if (selection == "Random") {
+            newKey.value = mainKeyRandom;
+        }
+        else if (selection == "Simple") {
+            newKey.value = mainKeySimple;
+        }
+        else {
+            newKey.value = mainKeyCustom;
+        }
+        //newKey.value = document.getElementById("mainKey").value;
         newDegree.value = 1;
         newInversion.value = 0;
         newOctave.value = 4;
     }
     else {
-        newKey.value = key;
+        if (selection == "Random") {
+            newKey.value = mainKeyRandom;
+        }
+        else if (selection == "Simple") {
+            newKey.value = mainKeySimple;
+        }
+        else {
+            newKey.value = mainKeyCustom;
+        }
         newDegree.value = degree;
         newInversion.value = inversion;
         newOctave.value = octave;
