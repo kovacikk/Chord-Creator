@@ -708,6 +708,212 @@ function generateCustomSong() {
     //Simple Pattern
     if (isSimpleCustom) {
 
+        var isGood = 0;
+        var array = new Array(chordNumber);
+
+        while(isGood == 0) {
+            //Check if Start on One
+            if (isStartOneCustom) {
+                array[0] = 1;
+            }
+            else if (document.getElementById("degreeType").value == 0) {
+                array[0] = Math.floor(Math.random() * 7) + 1;
+            }
+            else {
+                //Fill in Custom
+                var sum = degreeWeights[0] + degreeWeights[1] + degreeWeights[2] + degreeWeights[3] + degreeWeights[4] + degreeWeights[5] + degreeWeights[6];
+                //console.log(sum);
+                var number = Math.floor(Math.random() * sum) + 1;
+                //console.log(number);
+                if (number >= 1 && number <= degreeWeights[0]) {
+                    array[0] = 1;
+                }
+                else if (number >= degreeWeights[0] + 1 && number <= degreeWeights[0] + degreeWeights[1]) {
+                    array[0] = 2;
+                }
+                else if (number >= degreeWeights[0] + degreeWeights[1] + 1 && number <= degreeWeights[0] + degreeWeights[1] + degreeWeights[2]) {
+                    array[0] = 3;
+                }
+                else if (number >= degreeWeights[0] + degreeWeights[1] + degreeWeights[2] + 1 && number <= degreeWeights[0] + degreeWeights[1] + degreeWeights[2] + degreeWeights[3]) {
+                    array[0] = 4;
+                }
+                else if (number >= degreeWeights[0] + degreeWeights[1] + degreeWeights[2] + degreeWeights[3] + 1 && number <= degreeWeights[0] + degreeWeights[1] + degreeWeights[2] + degreeWeights[3] + degreeWeights[4]) {
+                    array[0] = 5;
+                }
+                else if (number >= degreeWeights[0] + degreeWeights[1] + degreeWeights[2] + degreeWeights[3] + degreeWeights[4] + 1 && number <= degreeWeights[0] + degreeWeights[1] + degreeWeights[2] + degreeWeights[3] + degreeWeights[4] + degreeWeights[5]) {
+                    array[0] = 6;
+                }
+                else {
+                    array[0] = 7;
+                }
+            }
+
+            for (k = 1; k < chordNumber; k++) {
+                //Previous Chord was 1
+                if (array[k-1] == 1) {
+                    //Any Chord Can Follow
+
+                    if (document.getElementById("degreeType").value == 0) {
+                        array[k] = Math.floor((Math.random() * 6) + 2);
+                    }
+                    else {
+                        var sum = degreeWeights[1] + degreeWeights[2] + degreeWeights[3] + degreeWeights[4] + degreeWeights[5] + degreeWeights[6];
+                        
+                        console.log(sum);
+                        var number = Math.floor(Math.random() * sum) + 1;
+                        console.log(number);
+                        if (number >= 1 && number <= degreeWeights[1]) {
+                            array[k] = 2;
+                        }
+                        else if (number >= degreeWeights[1] + 1 && number <= degreeWeights[1] + degreeWeights[2]) {
+                            array[k] = 3;
+                        }
+                        else if (number >= degreeWeights[1] + degreeWeights[2] + 1 && number <= degreeWeights[1] + degreeWeights[2] + degreeWeights[3]) {
+                            array[k] = 4;
+                        }
+                        else if (number >= degreeWeights[1] + degreeWeights[2] + degreeWeights[3] + 1 && number <= degreeWeights[1] + degreeWeights[2] + degreeWeights[3] + degreeWeights[4]) {
+                            array[k] = 5;
+                        }
+                        else if (number >= degreeWeights[1] + degreeWeights[2] + degreeWeights[3] + degreeWeights[4] + 1 && number <= degreeWeights[1] + degreeWeights[2] + degreeWeights[3] + degreeWeights[4] + degreeWeights[5]) {
+                            array[k] = 6;
+                        }
+                        else if (number >= degreeWeights[1] + degreeWeights[2] + degreeWeights[3] + degreeWeights[4] + degreeWeights[5] + 1 && number <= degreeWeights[1] + degreeWeights[2] + degreeWeights[3] + degreeWeights[4] + degreeWeights[5] + degreeWeights[6]) {
+                            array[k] = 7;
+                        }
+                        else {
+                            console.log("error");
+                        }
+                    }
+                }
+                //Previous Chord was 2 or 4
+                else if ((array[k-1] == 2) || (array[k-1] == 4))  {
+                    if (document.getElementById("degreeType").value == 0) {
+                        var choice = Math.floor((Math.random() * 2));
+                        if (choice == 0) {
+                            array[k] = 5;
+                        }
+                        else {
+                            array[k] = 7;
+                        }
+                    }
+                    else {
+                        var sum = degreeWeights[4] + degreeWeights[6];
+                        var number = Math.floor(Math.random() * sum) + 1;
+                        if (number >= 1 && number <= degreeWeights[4]) {
+                            array[k] = 5;
+                        }
+                        else {
+                            array[k] = 7;
+                        }
+                    }
+                }
+                //Previous Chord was 3
+                else if (array[k-1] == 3) {
+                    array[k] = 6;
+                }
+                //Previous Chord was 5 or 7
+                else if ((array[k-1] == 5) || (array[k-1] == 7)) {
+                    array[k] = 1;
+                }
+                //Previous Chord was 6
+                else if (array[k-1] == 6) {
+                    if (document.getElementById("degreeType").value == 0) {
+                        var choice = Math.floor((Math.random() * 2))
+                        if (choice == 0) {
+                            array[k] = 2;
+                        }
+                        else {
+                            array[k] = 4;
+                        }
+                    }
+                    else {
+                        var sum = degreeWeights[1] + degreeWeights[3];
+                        var number = Math.floor(Math.random() * sum) + 1;
+                        if (number >= 1 && number <= degreeWeights[1]) {
+                            array[k] = 2;
+                        }
+                        else {
+                            array[k] = 4;
+                        }
+                    }
+                }
+                else {
+                    console.log("Error");
+                }
+            }
+
+            if (isEndFiveCustom == false || (array[chordNumber - 1] == 5) || array[chordNumber - 1] == 7) {
+                isGood = 1;
+            }else {
+                setTimeout(nothing,1);
+            }
+        }
+
+        for (k = 0; k < chordNumber; k++) {
+            //None
+            if (document.getElementById("inversionType").value == 0) {
+                inversion = 0;
+            }//Full Random
+            else if (document.getElementById("inversionType").value == 1) {
+                inversion = Math.floor(Math.random() * 3);
+            }//Custom Random
+            else {
+                var sum = inversionWeights[0] + inversionWeights[1] + inversionWeights[2];
+                var number = Math.floor(Math.random() * sum) + 1;
+
+                if (number >= 1 && number <= inversionWeights[0]) {
+                    inversion = 0;
+                }
+                else if (number >= inversionWeights[0] + 1 && number <= inversionWeights[0] + inversionWeights[1]) {
+                    inversion = 1;
+                }
+                else {
+                    inversion = 2;
+                }
+            }
+
+            //Static
+            if (document.getElementById("octaveType").value == 0) {
+                octave = document.getElementById("static_range_weight").value;
+            }//Threshold
+            else if (document.getElementById("octaveType").value == 1) {
+                var min = parseInt(document.getElementById("octaveMin").value, 10);
+                var max = parseInt(document.getElementById("octaveMax").value, 10);
+
+                octave = Math.floor(Math.random() * (max - min + 1)+ min);
+            }//Full Random
+            else if (document.getElementById("octaveType").value == 2) {
+                octave = Math.floor(Math.random() * 7) + 1;
+            }//Custom Random
+            else {
+                var sum = octaveWeights[0] + octaveWeights[1] + octaveWeights[2] + octaveWeights[3] + octaveWeights[4] + octaveWeights[5] + octaveWeights[6];
+                var number = Math.floor(Math.random() * sum) + 1;
+                
+                if (number >= 1 && number <= octaveWeights[0]) {
+                    octave = 1;
+                }
+                else if (number >= octaveWeights[0] + 1 && number <= octaveWeights[0] + octaveWeights[1]) {
+                    octave = 2;
+                }
+                else if (number >= octaveWeights[0] + octaveWeights[1] + 1 && number <= octaveWeights[0] + octaveWeights[1] + octaveWeights[2]) {
+                    octave = 3;
+                }
+                else if (number >= octaveWeights[0] + octaveWeights[1] + octaveWeights[2] + 1 && number <= octaveWeights[0] + octaveWeights[1] + octaveWeights[2] + octaveWeights[3]) {
+                    octave = 4;
+                }
+                else if (number >= octaveWeights[0] + octaveWeights[1] +octaveWeights[2] + octaveWeights[3] + 1 && number <= octaveWeights[0] + octaveWeights[1] + octaveWeights[2] + octaveWeights[3] + octaveWeights[4]) {
+                    octave = 5;
+                }
+                else if (number >= octaveWeights[0] + octaveWeights[1] + octaveWeights[2] + octaveWeights[3] + octaveWeights[4] + 1 && number <= octaveWeights[0] + octaveWeights[1] + octaveWeights[2] + octaveWeights[3] + octaveWeights[4] + octaveWeights[5]) {
+                    octave = 6;
+                }
+                else {
+                    octave = 7;
+                }
+            }
+
+            addChord(key, array[k], inversion, octave, 0);
+        }
     } //Custom Pattern
     else {
         for (k = 0; k < chordNumber; k++) {
