@@ -577,15 +577,7 @@ function addChord(key, degree, inversion, octave, defaultBool) {
         newOctave.value = 4;
     }
     else {
-        if (selection == "Random") {
-            newKey.value = mainKeyRandom;
-        }
-        else if (selection == "Simple") {
-            newKey.value = mainKeySimple;
-        }
-        else {
-            newKey.value = mainKeyCustom;
-        }
+        newKey.value = key;
         newDegree.value = degree;
         newInversion.value = inversion;
         newOctave.value = octave;
@@ -1150,4 +1142,140 @@ function resetWeightOctave() {
     document.getElementById("five_octave_range_disp").value = 50;
     document.getElementById("six_octave_range_disp").value = 50;
     document.getElementById("seven_octave_range_disp").value = 50;
+}
+
+function copyText() {
+    var copyText = document.getElementById("myInput");
+    copyText.select();
+    document.execCommand("copy");
+
+    var copyButton = document.getElementById("copyText");
+    copyButton.innerHTML = "Copied";
+}
+
+function generateCode() {
+    var code = counter.toString();
+    code = code + "^";
+    for (i = 1; i < counter + 1; i++) {
+        var chord = document.getElementById("chord" + i.toString());
+
+        //Add Key
+        code = code + chord.getElementsByTagName("select")[0].value;
+        code = code + "*";
+        //Add Degree
+        code = code + chord.getElementsByTagName("select")[1].value;
+        //Add Inversion
+        code = code + chord.getElementsByTagName("select")[2].value;
+        //Add Octave
+        code = code + chord.getElementsByTagName("select")[3].value;
+    }
+    code = code + "$";
+    console.log(code);
+    document.getElementById("myInput").value = code;
+    document.getElementById("copyText").innerHTML = "Copy Code";
+}
+
+function parseCode() {
+    var code = document.getElementById("code").value;
+    console.log(code);
+    reset();
+
+    var invalidCode = 0;
+    //ReBuildSong
+
+    var chordNumber = "";
+    var start = 0;
+    for (i = 0; i < code.length; i++) {
+        if (code[i] != '^') {
+            chordNumber += code[i];
+        }
+        else {
+            start = i;
+            break;
+        }
+    }
+
+    chordNumber = parseInt(chordNumber);
+    //console.log(chordNumber);
+    //console.log(code.length);
+
+    if (Number.isNaN(chordNumber)) {
+        invalidCode = 1;
+    }
+
+    var counter = start + 1;
+    for (k = 0; k < chordNumber; k++) {
+        var key = "";
+
+        var loopCounter = 0;
+        while (code[counter] != '*') {
+            loopCounter++;
+            key = key + code[counter];
+            counter++;
+            if (loopCounter > 2) {
+                invalidCode = 1;
+                break;
+            }
+        }
+        counter++;
+        //key = parseInt(key);
+
+        degree = parseInt(code[counter]);
+        counter++;
+
+        inversion = parseInt(code[counter]);
+        counter++;
+
+        octave = parseInt(code[counter]);
+        counter++;
+        
+        console.log(key, degree, inversion, octave);
+        if (!checkKey(key) || !checkDegreeAndOctave(degree) || !checkDegreeAndOctave(octave) || !checkInversion(inversion) || invalidCode == 1) {
+            invalidCode = 1;
+            break;
+        }
+
+        addChord(key, degree, inversion, octave, 0);
+    }
+
+    if (invalidCode == 1) {
+        reset();
+        document.getElementById("parseButton").innerHTML = "Invalid Code";
+        document.getElementById("parseButton").style.backgroundColor = "red";
+        document.getElementById("parseButton").style.color = "white";
+    }
+    else {
+        document.getElementById("parseButton").innerHTML = "Parse Code";
+        document.getElementById("parseButton").style.backgroundColor = "white";
+        document.getElementById("parseButton").style.color = "black";
+    }
+
+    selectReset();
+}
+
+function checkKey(key) {
+    if (key == "Ab" || key == "A" || key == "Bb" || key == "B" || key == "C" || key == "Db" || key == "D" || key == "Eb" || key == "E" || key == "F" || key == "Gb" || key == "G") {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function checkDegreeAndOctave(input) {
+    if (input >= 1 && input <= 7) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function checkInversion(inversion) {
+    if (inversion >= 0 && inversion <= 2) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }

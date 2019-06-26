@@ -691,7 +691,7 @@
         </div>
 
         <br>
-
+        <br>
         <div class="container">
             <div class="row">
                 <div class="col-sm-2">
@@ -715,7 +715,7 @@
         <div id="songCont">
 
         </div>
-
+        <br>
         <br>
         <div id="functionsBar2" hidden class="row rounded-lg">
                 <div class="col-sm-3 justify-content-center" id="playButton1">
@@ -735,6 +735,29 @@
                     </div>
                 </div>
             </div>
+        <br>
+        <br>
+        
+        <div id="codeBar" class="rounded-lg">
+            <div class="row">
+                <div class="col-sm-2 btn-group">
+                    <button class="btn btn-dark codeBarButton" onclick="generateCode()" id="generateCode">Generate Code</button>
+                </div>
+                <div class="col-sm-3 codeBar">
+                    <input type="text" class="form-control" placeholder="Code" id="myInput">
+                </div>
+                <div class="col-sm-2 btn-group">
+                    <button class="btn btn-dark codeBarButton" onclick="copyText()" id="copyText">Copy Code</button>
+                </div>
+                <div class="col-sm-3 codeBar">
+                    <input type="text" class="form-control" placeholder="Insert Code" id="code">
+                </div>
+                <div class="col-sm-2 btn-group">
+                    <button class="btn btn-dark codeBarButton" onclick="parseCode()" id="parseButton">Parse Code</button>
+                </div>
+            </div>
+        </div>
+
         <br>
     </body>
     <script>

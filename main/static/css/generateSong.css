@@ -185,3 +185,22 @@ input {
     width: 100%;
 
 }
+
+#codeBar {
+    height: 10vh;
+    background-color: rgb(209, 208, 208);
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+
+.codeBar {
+    margin-top: 2vh;
+    height: 8vh;
+}
+
+.codeBarButton{
+    height: 6vh;
+    margin-top: 2vh;
+    color: black;
+    background-color: white;
+}
