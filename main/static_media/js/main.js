@@ -1,11 +1,44 @@
 console.clear();
 
-var keyId = document.getElementById("keyId");
-var degreeId = document.getElementById("degree");
-var inversionId = document.getElementById("inversionId");
-var octaveId = document.getElementById("octaveId");
 
 function generateFirst() {
+
+    var sampler = new Tone.Sampler({
+        "A0" : kawaiiPiano + "/A0vH.wav",
+        "A1" : kawaiiPiano + "/A1vH.wav",
+        "A2" : kawaiiPiano + "/A2vL.wav",
+        "A3" : kawaiiPiano + "/A3vH.wav",
+        "A4" : kawaiiPiano + "/A4vH.wav",
+        "A5" : kawaiiPiano + "/A5vH.wav",
+        "A6" : kawaiiPiano + "/A6vH.wav",
+        "A7" : kawaiiPiano + "/A7vH.wav",
+        "B0" : kawaiiPiano + "/B0vH.wav",
+        "B1" : kawaiiPiano + "/B1vH.wav",
+        "B2" : kawaiiPiano + "/B2vH.wav",
+        "B3" : kawaiiPiano + "/B3vH.wav",
+        "B4" : kawaiiPiano + "/B4vH.wav",
+        "B5" : kawaiiPiano + "/B5vH.wav",
+        "B6" : kawaiiPiano + "/B6vH.wav",
+        "B7" : kawaiiPiano + "/B7vH.wav",
+        "C1" : kawaiiPiano + "/C1vH.wav",
+        "C2" : kawaiiPiano + "/C2vH.wav",
+        "C3" : kawaiiPiano + "/C3vH.wav",
+        "C4" : kawaiiPiano + "/C4vL.wav",
+        "C5" : kawaiiPiano + "/C5vH.wav",
+        "C6" : kawaiiPiano + "/C6vH.wav",
+        "C7" : kawaiiPiano + "/C7vH.wav",
+        "C8" : kawaiiPiano + "/C8vH.wav",
+    }, {
+       'release' : '10',
+       'attack' : '0',
+    }).toMaster();
+    
+    sampler.volume.value = -10;
+
+    var keyId = document.getElementById("keyId");
+    var degreeId = document.getElementById("degree");
+    var inversionId = document.getElementById("inversionId");
+    var octaveId = document.getElementById("octaveId");
 
     var triad = getTriads(keyId.value, degreeId.value);
 

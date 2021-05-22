@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        {% load staticfiles %}
+        {% load static %}
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -79,7 +79,8 @@
                                         <input type="number" class="form-control" id="chordNumberRandom" value="4">
                                     </div>
                                     <div class="col-sm-3">
-                                        <select id="instrumentRandom" class="form-control">                                                <option selected value="samplerPiano">Piano</option>
+                                        <select id="instrumentRandom" class="form-control">
+                                            <option selected value="samplerPiano">Piano</option>
                                             <option value="samplerGuitar">Guitar</option>
                                             <option value="samplerSynth">Synth</option>
                                             <option value="samplerCustom">Custom</option>
@@ -141,7 +142,8 @@
                                     <input type="number" class="form-control" id="chordNumberSimple" value="4">
                                   </div>
                                   <div class="col-sm-2">
-                                    <select id="instrumentSimple" class="form-control">                                                <option selected value="samplerPiano">Piano</option>
+                                    <select id="instrumentSimple" class="form-control">                              
+                                        <option selected value="samplerPiano">Piano</option>
                                         <option value="samplerGuitar">Guitar</option>
                                         <option value="samplerSynth">Synth</option>
                                         <option value="samplerCustom">Custom</option>
@@ -231,8 +233,9 @@
                                       <input type="number" class="form-control" id="chordNumberCustom" value="4">
                                     </div>
                                     <div class="col-sm-3">
-                                      <select id="instrumentCustom" class="form-control">                                                <option selected value="samplerPiano">Piano</option>
-                                            <option value="samplerGuitar">Guitar</option>
+                                      <select id="instrumentCustom" class="form-control">                                                
+                                          <option selected value="samplerPiano">Piano</option>
+                                          <option value="samplerGuitar">Guitar</option>
                                           <option value="samplerSynth">Synth</option>
                                           <option value="samplerCustom">Custom</option>
                                       </select>

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        {% load staticfiles %}
+        {% load static %}
        
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="{% static 'js/Tone.js' %}"></script>
         <link rel='stylesheet' type="text/css" href="{% static 'css/main.css' %}">
@@ -20,9 +21,6 @@
         <div  id="genCont">
             <a href="/generateSong" class="btn-group-sm" style="width: 402px;">
                 <button class="btn btn-dark btn-block">Generate Song</button>
-            </a>
-            <a href="/dad" class="btn-group-sm" style="width: 402px;">
-                <button class="btn btn-dark btn-block">Go to Dad</button>
             </a>
         </div>
         
@@ -106,20 +104,14 @@
 
         <br>
         <div class="row" id="playCont">
-                <button class="btn btn-dark" onclick="generateFirst()" id="generateFirst">Play Chord</button>
+                <button class="btn btn-dark" onclick="playSong()" id="generateFirst">Play Chord</button>
         </div>
 
-        <!---
-        <div>
-            <ul id="piano">
-
-            </ul>
-        </div>
-        -->
     </body>
     <script>
         var kawaiiPiano = "{% static 'samples/KawaiiUprightPiano' %}";
     </script>
     <script src="{% static 'js/pianoSampler.js' %}"></script>
+
     <script src="{% static 'js/main.js' %}"></script>
 </html>

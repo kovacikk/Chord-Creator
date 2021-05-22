@@ -1,9 +1,11 @@
+/* generateSong.js */
+// Contains Many Functions to Generate and Play Custom Chords
+
+
 document.getElementById("addChord").addEventListener('click', selectReset, false);
-//document.getElementById("tempo").addEventListener('change', updateTempo);
 document.getElementById("degreeType").addEventListener('change', updateDegreeView);
 document.getElementById("inversionType").addEventListener('change', updateInversionView);
 document.getElementById("octaveType").addEventListener('change', updateOctaveView);
-//document.getElementById("instrument").addEventListener('change', updateInstrument);
 
 var isPlay = false;
 var counter = 0;
@@ -104,6 +106,7 @@ document.getElementById("isEndFiveCustom").addEventListener('change', function()
     isEndFiveCustom = document.getElementById("isEndFiveCustom").checked;
 });
 
+// Default Values
 var degreeType = 0;
 var degreeWeights = [50,50,50,50,50,50,50];
 
@@ -116,6 +119,7 @@ var octaveMin = 1;
 var octaveMax = 7;
 var octaveWeights = [50,50,50,50,50,50,50];
 
+// Update Selections on User Input
 function updateSelection(type) {
     if (type == "Random") {
         selection = "Random";
@@ -132,12 +136,14 @@ function updateSelection(type) {
     }
 }
 
+// Play Tone.js
 function selectPlay() {
     if (isPlay) {
         play();
     }
 }
 
+// Stop and Play Tone.js
 function selectReset() {
     if (isPlay) {
         stop();
@@ -145,9 +151,13 @@ function selectReset() {
     }
 }
 
+//Adds New Chord with Default Values
 function addChord1() {
     addChord(0,0,0,0,1);
 }
+
+
+// Different Views for Different Selections
 
 function updateDegreeView() {
     var degreeOption = document.getElementById("degreeType").value;
@@ -258,6 +268,7 @@ function updateOctaveView() {
     }
 }
 
+// Changes Instrument
 function updateInstrument(type) {
     if (type == "Random") {
         instrumentRandom = document.getElementById("instrumentRandom").value;
@@ -281,6 +292,7 @@ function updateInstrument(type) {
     }
 }
 
+// Changes Tempo
 function updateTempo(type) {
     if (type == "Random") {
         tempoRandom = document.getElementById("tempoRandom").value;
@@ -295,18 +307,9 @@ function updateTempo(type) {
         Tone.Transport.bpm.rampTo(tempoCustom, 1);
         bpm = tempoCustom;
     }
-
-    //bpm = document.getElementById("tempo").value;
-    //Tone.Transport.bpm = bpm;
-    //Tone.Transport.bpm.rampTo(bpm, 1);
-    
-    //if (isPlay) {
-    //    play();
-    //}
-    //console.log(document.getElementById("tempo").value);
 }
 
-
+// Removes a Chord
 function removeChord(counterString) {
     console.log("remove");
 
@@ -363,10 +366,8 @@ function removeChord(counterString) {
 }
 
 
-//song.ppendChild(newButton)
-
+// Play a Specific Chord
 function playTriad(counterString) {
-    //console.log("play:" + counterString);
 
     var keyId = document.getElementById("key" + counterString);
     var degreeId = document.getElementById("degree" + counterString);
@@ -381,28 +382,29 @@ function playTriad(counterString) {
     sampler.triggerAttackRelease(triad, "4n");
 }
 
+// Start or Stop Song
 function playSong() {
     if (isPlay) {
         stop();
         isPlay = false;
-        //document.getElementById("playSong").innerHTML = "Play Song";
+        
         document.getElementById("stopButton").setAttribute("hidden", true);
         document.getElementById("playButton").removeAttribute("hidden");
     }
     else {
         play();
         isPlay = true;
-        //document.getElementById("playSong").innerHTML = "Stop Song";
+
         document.getElementById("playButton").setAttribute("hidden", true);
         document.getElementById("stopButton").removeAttribute("hidden");
     }
 }
 
+// Main Function for Playing Song Functionality
 function play() {
 
     console.log("Play Song");
     Tone.Transport.cancel();
-    //Tone.Transport.stop();
     var triadArray = [];
 
     console.log(selection);
@@ -460,22 +462,14 @@ function play() {
         var array2 = [i * Tone.Time("2n"), triad];
         triadArray.push(array2);
     }
-    //console.log(triadArray);
-
-    //var seq = new Tone.Sequence(function(time, triad) {
-    //    console.log(triad);
-    //    sampler.triggerAttackRelease(triad, "4n");
-    //}, triadArray, "4n");
 
     var chordPart = new Tone.Part(function(time, triad) {
-        //console.log(Tone.Transport.progress);
         sampler.triggerAttackRelease(triad, "2n", time);
 
         for (i = 0; i < counter; i++) {
             var counterString = (i+1);
             var iconId = document.getElementById("icon" + counterString);
 
-            //console.log(Tone.Transport.position);
             var position = Tone.Transport.position;
             var firstPosition = parseInt(position.split(':')[0], 10);
             var secondPosition = parseInt(position.split(':')[1], 10);
@@ -496,12 +490,6 @@ function play() {
 
     }, triadArray).start(0);
 
-    //chordPart.loop = true;
-    //chordPart.loopStart = "0:0";
-
-    //var endTime = counter * 0.5;
-    //chordPart.loopEnd = endTime.toString() + ":0";
-
     Tone.Transport.loop = true;
     Tone.Transport.loopStart = "0:0";
 
@@ -515,12 +503,14 @@ function play() {
     Tone.Transport.start();
 }
 
+// Stops Song
 function stop() {
     Tone.Transport.cancel();
     Tone.Transport.stop();
     console.log("Stop Song");
 }
 
+// Adds New Chord to Specification
 function addChord(key, degree, inversion, octave, defaultBool) {
     counter += 1;
     var counterString = counter.toString();
@@ -571,7 +561,7 @@ function addChord(key, degree, inversion, octave, defaultBool) {
         else {
             newKey.value = mainKeyCustom;
         }
-        //newKey.value = document.getElementById("mainKey").value;
+
         newDegree.value = 1;
         newInversion.value = 0;
         newOctave.value = 4;
@@ -699,16 +689,10 @@ function generateSimpleSong() {
     selectReset();
 }
 
-function nothing() {
-
-}
-
+// Generate a Custom Song
 function generateCustomSong() {
     console.log("GenerateCustomSong");
     buildArrays();
-    //console.log(degreeWeights);
-    //console.log(inversionWeights);
-    //console.log(octaveWeights);
 
     reset();
     var key = mainKeyCustom;
@@ -1032,6 +1016,7 @@ function generateCustomSong() {
     selectReset();
 }
 
+// Gets Current Values for Different Weights
 function buildArrays() {
     degreeWeights[0] = parseInt(document.getElementById("one_degree_range_disp").value,10);
     degreeWeights[1] = parseInt(document.getElementById("two_degree_range_disp").value,10);
@@ -1054,6 +1039,7 @@ function buildArrays() {
     octaveWeights[6] = parseInt(document.getElementById("seven_octave_range_disp").value,10);
 }
 
+// Removes all Chords
 function reset() {
     for (i = 1; i < counter + 1; i++) {
         var chordId = document.getElementById("chord" + i.toString());
@@ -1065,17 +1051,11 @@ function reset() {
         playSong();
     }
 
-    //document.getElementById("chordNumber").value = 4;
-
-    //document.getElementById("mainKey").value = "C";
-
-    //bpm = 120;
-    //Tone.Transport.bpm.rampTo(bpm,1);
-    //document.getElementById("tempo").value = bpm;
     var playBar2 = document.getElementById("functionsBar2");
     playBar2.setAttribute("hidden", true);
 }
 
+// Event When Scroll is Enabled, Creates Play Button on the Bottom of the Screen
 function isScrolledIntoView(el) {
     var rect = el.getBoundingClientRect();
     var elemTop = rect.top;
@@ -1083,11 +1063,11 @@ function isScrolledIntoView(el) {
 
     // Only completely visible elements return true:
     var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
-    // Partially visible elements return true:
-    //isVisible = elemTop < window.innerHeight && elemBottom >= 0;
+    
     return isVisible;
 }
 
+// Resets Weights
 function resetWeightDegree() {
     for (i = 0; i < degreeWeights.length; i++) {
         degreeWeights[i] = 50;
@@ -1144,6 +1124,7 @@ function resetWeightOctave() {
     document.getElementById("seven_octave_range_disp").value = 50;
 }
 
+// Copy Function
 function copyText() {
     var copyText = document.getElementById("myInput");
     copyText.select();
@@ -1153,6 +1134,7 @@ function copyText() {
     copyButton.innerHTML = "Copied";
 }
 
+// Creates Code
 function generateCode() {
     var code = counter.toString();
     code = code + "^";
@@ -1175,6 +1157,7 @@ function generateCode() {
     document.getElementById("copyText").innerHTML = "Copy Code";
 }
 
+// Builds Chords Based on Code
 function parseCode() {
     var code = document.getElementById("code").value;
     console.log(code);
@@ -1196,8 +1179,6 @@ function parseCode() {
     }
 
     chordNumber = parseInt(chordNumber);
-    //console.log(chordNumber);
-    //console.log(code.length);
 
     if (Number.isNaN(chordNumber)) {
         invalidCode = 1;
@@ -1218,7 +1199,6 @@ function parseCode() {
             }
         }
         counter++;
-        //key = parseInt(key);
 
         degree = parseInt(code[counter]);
         counter++;
@@ -1252,6 +1232,8 @@ function parseCode() {
 
     selectReset();
 }
+
+// Key, Octave and Inversion Checking
 
 function checkKey(key) {
     if (key == "Ab" || key == "A" || key == "Bb" || key == "B" || key == "C" || key == "Db" || key == "D" || key == "Eb" || key == "E" || key == "F" || key == "Gb" || key == "G") {
